@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace RecipeWebsite.Models
 {
-    public class AppUserModel
+    public class AppUserModel : IdentityUser
     {
         // Applcation
         [Key]
