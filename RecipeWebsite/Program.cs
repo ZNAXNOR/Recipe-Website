@@ -1,7 +1,22 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using RecipeWebsite.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+#region Project Services
+
+// Database
+var MSSQLdatabase = builder.Configuration.GetConnectionString("Database_Connection");
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(MSSQLdatabase));
+
+// Identity
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+
+#endregion
 
 var app = builder.Build();
 
