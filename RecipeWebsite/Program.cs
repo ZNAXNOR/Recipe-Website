@@ -1,6 +1,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using RecipeWebsite.Data;
+using RecipeWebsite.Helpers;
+using RecipeWebsite.Interfaces;
+using RecipeWebsite.Repositories;
+using RecipeWebsite.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,12 +13,32 @@ builder.Services.AddControllersWithViews();
 
 #region Project Services
 
+var services = builder.Services;
+
+// Collection
+services.AddScoped<ICollectionInterface, CollectionRepository>();
+
+// Post
+services.AddScoped<IPostInterface, PostRepository>();
+
+// Photo
+services.AddScoped<IPhotoInterface, PhotoService>();
+
+var CloudinaryDatabase = builder.Configuration.GetSection("CloudinarySettings");
+services.Configure<CloudinarySettingsHelper>(CloudinaryDatabase);
+
 // Database
 var MSSQLdatabase = builder.Configuration.GetConnectionString("Database_Connection");
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(MSSQLdatabase));
+services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(MSSQLdatabase));
 
 // Identity
-builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+
+// Email
+services.AddTransient<IEmailSenderInterface, EmailSenderService>();
+
+var SMTP_Credentials = builder.Configuration.GetSection("SMTP_Credentials");
+services.Configure<EmailHelper>(SMTP_Credentials);
 
 #endregion
 
