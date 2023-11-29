@@ -17,3 +17,29 @@
 - [ ] User Settings
 - [x] User Feedback
 - [ ] UI/UX
+
+## NuGet Packages <sub>Package Manager<sub>
+- Bootstrap (Version 5.3.2)
+``` 
+NuGet\Install-Package bootstrap -Version 5.3.2
+```  
+- CloudinaryDotNet (Version 1.23.0)
+```
+NuGet\Install-Package CloudinaryDotNet -Version 1.23.0
+```
+- Microsoft.AspNetCore.Identity.EntityFrameworkCore (Version 7.0.14)
+```
+NuGet\Install-Package Microsoft.AspNetCore.Identity.EntityFrameworkCore -Version 7.0.14
+```
+- Microsoft.EntityFrameworkCore (Version 7.0.14)
+```
+NuGet\Install-Package Microsoft.EntityFrameworkCore -Version 7.0.14
+```
+- Microsoft.EntityFrameworkCore.SqlServer (Version 7.0.14)
+```
+NuGet\Install-Package Microsoft.EntityFrameworkCore.SqlServer -Version 7.0.14
+```
+- Microsoft.EntityFrameworkCore.Tools (Version 7.0.14)
+```
+NuGet\Install-Package Microsoft.EntityFrameworkCore.Tools -Version 7.0.14
+```
