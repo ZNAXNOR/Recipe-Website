@@ -20,6 +20,13 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkSto
 
 var app = builder.Build();
 
+// Database
+var MSSQLdatabase = builder.Configuration.GetConnectionString("Database_Connection");
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(MSSQLdatabase));
+
+// Identity
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
