@@ -19,27 +19,27 @@
 - [ ] UI/UX
 
 ## NuGet Packages <sub>Package Manager<sub>
-- Bootstrap (Version 5.3.2)
+- Bootstrap
 ``` 
-NuGet\Install-Package bootstrap -Version 5.3.2
+NuGet\Install-Package bootstrap
 ```  
-- CloudinaryDotNet (Version 1.23.0)
+- CloudinaryDotNet
 ```
-NuGet\Install-Package CloudinaryDotNet -Version 1.23.0
+NuGet\Install-Package CloudinaryDotNet
 ```
-- Microsoft.AspNetCore.Identity.EntityFrameworkCore (Version 7.0.14)
+- Microsoft.AspNetCore.Identity.EntityFrameworkCore
 ```
-NuGet\Install-Package Microsoft.AspNetCore.Identity.EntityFrameworkCore -Version 7.0.14
+NuGet\Install-Package Microsoft.AspNetCore.Identity.EntityFrameworkCore
 ```
-- Microsoft.EntityFrameworkCore (Version 7.0.14)
+- Microsoft.EntityFrameworkCore
 ```
-NuGet\Install-Package Microsoft.EntityFrameworkCore -Version 7.0.14
+NuGet\Install-Package Microsoft.EntityFrameworkCore
 ```
-- Microsoft.EntityFrameworkCore.SqlServer (Version 7.0.14)
+- Microsoft.EntityFrameworkCore.SqlServer
 ```
-NuGet\Install-Package Microsoft.EntityFrameworkCore.SqlServer -Version 7.0.14
+NuGet\Install-Package Microsoft.EntityFrameworkCore.SqlServer
 ```
-- Microsoft.EntityFrameworkCore.Tools (Version 7.0.14)
+- Microsoft.EntityFrameworkCore.Tools
 ```
-NuGet\Install-Package Microsoft.EntityFrameworkCore.Tools -Version 7.0.14
+NuGet\Install-Package Microsoft.EntityFrameworkCore.Tools
 ```
