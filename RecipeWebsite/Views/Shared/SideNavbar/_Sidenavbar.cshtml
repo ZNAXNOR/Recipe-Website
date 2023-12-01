@@ -1,0 +1,47 @@
+﻿<div class="l-navbar" id="nav-bar">
+    <nav class="nav">
+        <div>
+            <!-- Title -->
+            <a asp-controller="Home" asp-action="Index" class="nav_logo">
+                <i class='bx bx-layer nav_logo-icon'></i>
+                <span class="nav_logo-name">RecipeWebsite</span>
+            </a>
+
+            <!-- Pages -->
+            <div class="nav_list">
+                <a asp-controller="Home" asp-action="Index" class="nav_link active">
+                    <i class='bx bx-home nav_icon'></i>
+                    <span class="nav_name">Home</span>
+                </a>
+                <a asp-controller="Home" asp-action="Privacy" class="nav_link">
+                    <i class='bx bx-user nav_icon'></i>
+                    <span class="nav_name">Privacy Policy</span>
+                </a>
+                <a asp-controller="Post" asp-action="Index" class="nav_link">
+                    <i class='bx bx-food-menu nav_icon'></i>
+                    <span class="nav_name">Recipe Post</span>
+                </a>
+                <a asp-controller="Collection" asp-action="Index" class="nav_link">
+                    <i class='bx bx-grid-alt nav_icon'></i>
+                    <span class="nav_name">Recipe Collection</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Server Time -->
+        <a class="nav_link">
+            <i class='bx bx-time-five nav_icon'></i>
+            <span class="small nav_name"> Server Time: <br /><strong> @DateTime.Today.ToString("d") @DateTime.Now.ToString("t") </strong></span>
+        </a>
+    </nav>
+</div>
+
+<!--Added-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+
+
+<!--CSS Added-->
+<link rel="stylesheet" href="~/css/created/sidebar.css" />
