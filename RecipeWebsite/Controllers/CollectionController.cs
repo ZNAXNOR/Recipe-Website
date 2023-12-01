@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using RecipeWebsite.Data;
 using RecipeWebsite.Interfaces;
 using RecipeWebsite.Models;
+using RecipeWebsite.ViewModels.CardsViewModel;
 using RecipeWebsite.ViewModels.CollectionViewModel;
 
 namespace RecipeWebsite.Controllers
@@ -24,8 +25,12 @@ namespace RecipeWebsite.Controllers
         // Index
         public async Task<IActionResult> Index()
         {
-            IEnumerable<CollectionModel> collections = await _collectionInterface.GetAll();
-            return View(collections);
+            var CardPostVM = new CardsViewModel
+            {
+                CollectionCard = await _context.Collections.ToListAsync()
+            };
+
+            return View(CardPostVM);
         }
 
 
@@ -42,7 +47,12 @@ namespace RecipeWebsite.Controllers
                 collections = collections.Where(s => s.Title!.Contains(searchString));
             }
 
-            return View(await collections.ToListAsync());
+            var CardPostVM = new CardsViewModel
+            {
+                CollectionCard = await collections.ToListAsync()
+            };
+
+            return View(CardPostVM);
         }
 
         // Detail

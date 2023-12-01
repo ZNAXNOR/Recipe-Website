@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RecipeWebsite.Data;
-using RecipeWebsite.ViewModels.SearchbarViewModel;
+using RecipeWebsite.ViewModels.CardsViewModel;
 
 namespace RecipeWebsite.Controllers
 {
@@ -27,13 +27,13 @@ namespace RecipeWebsite.Controllers
                 collections = collections.Where(c => c.Title!.Contains(searchString));
             }
 
-            var searchbarVM = new SearchbarViewModel
+            var CardPostVM = new CardsViewModel
             {
-                Posts = await posts.ToListAsync(),
-                Collections = await collections.ToListAsync()
+                PostCard = await posts.ToListAsync(),
+                CollectionCard = await collections.ToListAsync()
             };
 
-            return View(searchbarVM);
+            return View(CardPostVM);
         }
     }
 }

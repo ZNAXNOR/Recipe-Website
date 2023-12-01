@@ -9,11 +9,11 @@ using RecipeWebsite.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
-
 #region Project Services
 
 var services = builder.Services;
+
+services.AddControllersWithViews();
 
 // Collection
 services.AddScoped<ICollectionInterface, CollectionRepository>();

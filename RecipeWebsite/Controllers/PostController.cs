@@ -4,6 +4,7 @@ using Microsoft.Extensions.Caching.Memory;
 using RecipeWebsite.Data;
 using RecipeWebsite.Interfaces;
 using RecipeWebsite.Models;
+using RecipeWebsite.ViewModels.CardsViewModel;
 using RecipeWebsite.ViewModels.PostViewModel;
 
 namespace RecipeWebsite.Controllers
@@ -28,12 +29,18 @@ namespace RecipeWebsite.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            var CardPostVM = new CardsViewModel
+            {
+                PostCard = await _context.Posts.ToListAsync()
+            };
+
             var cached = _cache.TryGetValue("post", out var post);
             if (cached)
             {
                 return View(post);
             }
-            return View(await _context.Posts.ToListAsync());
+
+            return View(CardPostVM);
         }
 
 
@@ -51,7 +58,12 @@ namespace RecipeWebsite.Controllers
                 post = post.Where(t => t.Title!.Contains(searchString));
             }
 
-            return View(await post.ToListAsync());
+            var CardPostVM = new CardsViewModel
+            {                
+                PostCard = await post.ToListAsync()
+            };
+
+            return View(CardPostVM);
         }
 
 
