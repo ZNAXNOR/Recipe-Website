@@ -1,0 +1,57 @@
+﻿@model CollectionModel
+
+@* Header *@
+<div class="py-5 text-center">
+    <h2>Collection Delete form</h2>
+    <p class="lead">Got a collection you want to delete? Delete it here!</p>
+</div>
+
+<form method="post" asp-action="Delete" enctype="multipart/form-data">
+
+    <div class="row g-5">
+
+        <form class="needs-validation" novalidate="">
+            <div class="p-4 p-md-5 border rounded-3 bg-body-tertiary">
+
+                <h4 class="mb-4">Collection Details</h4>
+
+                <!-- Title -->
+                <div class="col-sm-12 mb-3">
+                    <label asp-for="Title" class="form-label">Collection Title</label>
+                    <input asp-for="Title" type="text" class="form-control" id="title" placeholder="" required disabled readonly>
+                    <div class="invalid-feedback">
+                        Collection Title is required.
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="col-sm-12 mb-3">
+                    <label asp-for="Description" class="form-label">Recipe Description</label>
+                    <input asp-for="Description" type="text" class="form-control" id="description" placeholder="" required disabled readonly>
+                    <div class="invalid-feedback">
+                        Collection Description is required.
+                    </div>
+                </div>
+
+                <!-- Image -->
+                <div class="col-12 mb-5">
+                    <label asp-for="Image">Image</label>
+                    <input asp-for="Image" type="file" class="form-control" id="image" placeholder="Thumbnail" required disabled readonly>
+                    <span asp-validation-for="Image" class="text-danger"></span>
+                    <div class="invalid-feedback">
+                        Collection Thumbnail is required.
+                    </div>
+                </div>
+
+                <!-- Delete -->
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                    <button type="button" class="btn btn-danger btn-lg px-4 gap-3" data-bs-toggle="modal" data-bs-target="#recipeDeleteModal">Delete Recipe</button>
+                    <a class="btn btn-secondary btn-lg px-4" asp-area="" asp-controller="Collection" asp-action="Index">Cancel</a>
+                </div>
+
+            </div>
+        </form>
+
+    </div>
+
+</form>

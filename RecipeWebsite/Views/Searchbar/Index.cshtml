@@ -1,0 +1,71 @@
+﻿@using RecipeWebsite.ViewModels.CardsViewModel
+
+@model CardsViewModel
+
+
+<div class="search-results">
+    <!-- Title -->
+    <h1>Search Results</h1>
+
+    <hr />
+
+    <!-- Cards -->
+    @if (Model.CollectionCard.Count != 0 || Model.PostCard.Count != 0)
+    {
+        <!-- Collection Cards -->
+        @if (Model.CollectionCard.Count != 0)
+        {
+            <h3>Collections</h3>
+
+            <div class="album py-5 bg-light">
+                <div class="container">
+
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+                        <partial name="~/Views/Shared/Cards/_CollectionCards.cshtml" />
+
+                    </div>
+
+                </div>
+            </div>
+        }
+        else
+        {
+            // Show nothing
+        }
+
+        @if (Model.CollectionCard.Count > 0 && Model.PostCard.Count > 0)
+        {
+            <hr />
+        }
+
+        <!-- Post Cards -->
+        @if (Model.PostCard.Count != 0)
+        {
+            <h3>Posts</h3>
+
+            <div class="album py-5 bg-light">
+                <div class="container">
+
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+                        <partial name="~/Views/Shared/Cards/_PostCards.cshtml" />
+
+                    </div>
+
+                </div>
+            </div>
+        }
+        else
+        {
+            // Show nothing
+        }
+    }
+    else // Error
+    {
+        <p class="text-secondary h3"> No results found. </p>
+        <br />
+        <p class="blockquote-footer"> your search has produced no results. Try using <strong><em> All Recipes </em></strong>for better results.</p>
+    }
+    
+</div>
