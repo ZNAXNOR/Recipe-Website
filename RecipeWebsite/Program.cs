@@ -13,13 +13,19 @@ var builder = WebApplication.CreateBuilder(args);
 
 var services = builder.Services;
 
-services.AddControllersWithViews();
+services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
 // Collection
 services.AddScoped<ICollectionInterface, CollectionRepository>();
 
 // Post
 services.AddScoped<IPostInterface, PostRepository>();
+
+// Collection Category
+services.AddScoped<ICollectionCategoryInterface, CollectionCategoryRepository>();
+
+// Post Category
+services.AddScoped<IPostCategoryInterface, PostCategoryRepository>();
 
 // Photo
 services.AddScoped<IPhotoInterface, PhotoService>();

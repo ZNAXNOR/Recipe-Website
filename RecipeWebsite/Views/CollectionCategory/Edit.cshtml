@@ -1,0 +1,35 @@
+﻿@using RecipeWebsite.ViewModels.CategoryViewModel.CollectionCategoryViewModel
+
+@model EditCollectionCategoryViewModel
+
+<!-- Header -->
+<div class="py-5 text-center">
+    <h2>Collection category editation form</h2>
+</div>
+
+<form method="post" asp-action="Edit" enctype="multipart/form-data" class="needs-validation" novalidate>
+
+    <div class="row g-5">
+        <div class="p-4 p-md-5 border rounded-3 bg-body-tertiary">
+
+            <!-- CategoryName -->
+            <div class="col-sm-12 mb-3">
+                <label asp-for="CategoryName" class="form-label">Collection Category</label>
+                <input asp-for="CategoryName" type="text" class="form-control" id="title" placeholder="" value="@Model.CategoryName" required>
+                <div class="invalid-feedback">
+                    Collection Category name is required.
+                </div>
+            </div>
+
+            <!-- Submit -->
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <button type="submit" class="btn btn-success btn-lg px-4 gap-3">Submit</button>
+                <button type="reset" class="btn btn-secondary btn-lg px-4">Reset</button>
+                <a class="btn btn-danger btn-lg px-4" asp-area="" asp-controller="CollectionCategory" asp-action="Index">Cancel</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</form>

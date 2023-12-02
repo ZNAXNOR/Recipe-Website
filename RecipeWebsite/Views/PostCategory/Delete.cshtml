@@ -1,0 +1,54 @@
+﻿@model PostCategoryModel
+
+<!-- Header -->
+<div class="py-5 text-center">
+    <h2>Post category deletation form</h2>
+</div>
+
+<form method="post" asp-action="Delete" enctype="multipart/form-data">
+
+    <div class="row g-5">
+        <div class="p-4 p-md-5 border rounded-3 bg-body-tertiary">
+
+            <!-- Category Name -->
+            <h4 class="fw-normal mb-3">
+                <a class="link-dark">Category Name</a>
+            </h4>
+            <p class="h3 pb-3 mb-4 border-bottom">
+                @Html.Raw(Model.CategoryName)
+            </p>
+
+            <!-- Delete -->
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <button type="button" class="btn btn-danger btn-lg px-4 gap-3" data-bs-toggle="modal" data-bs-target="#recipeDeleteModal">Delete Recipe</button>
+                <a class="btn btn-secondary btn-lg px-4" asp-area="" asp-controller="PostCategory" asp-action="Index">Cancel</a>
+            </div>
+
+            <!-- Delete Confirmation -->
+            <div class="modal fade" id="recipeDeleteModal" tabindex="-1">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content">
+                        <!-- Model Header -->
+                        <div class="modal-header bg-dark text-white">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm Category Delete?</h1>
+                            <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <!-- Model Body -->
+                        <div class="modal-body">
+                            <p class="fs-4">Are you sure you want to delete <strong>@Model.CategoryName</strong> ?</p>
+                            <p class="fst-italic"><small>This action<code> cannot be reverted</code>.</small></p>
+                        </div>
+                        <!-- Model Buttons -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-danger">Confirm Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</form>

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RecipeWebsite.Data;
 
@@ -11,9 +12,11 @@ using RecipeWebsite.Data;
 namespace RecipeWebsite.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231201034728_Category")]
+    partial class Category
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -228,7 +231,7 @@ namespace RecipeWebsite.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("RecipeWebsite.Models.CollectionCategoryModel", b =>
+            modelBuilder.Entity("RecipeWebsite.Models.ColectionCategoryModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -242,7 +245,7 @@ namespace RecipeWebsite.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CollectionCategories");
+                    b.ToTable("ColectionCategories");
                 });
 
             modelBuilder.Entity("RecipeWebsite.Models.CollectionModel", b =>
