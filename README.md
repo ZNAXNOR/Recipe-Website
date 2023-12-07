@@ -17,8 +17,16 @@
 
 
 - [Enum files](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/enum) are replaced by database tables.
-  -  **Categories** uses database tables now.
-  -  Categories can be managed (_Create, Edit, Delete_) directly by the users.
+  - **Categories** uses database tables now.
+  - Categories can be managed (_Create, Edit, Delete_) directly by the users.
+ 
+- **Files re-named** to be:
+  - Unique
+  - Easier to distinguish.
+  - Not confusing.
+  - Not hard to keep track of when mentioned.
+  - Example:
+    - `Post` file in **Models directory** used to be named `Post`. Renamed to `PostModel`.
     
 ---
 
@@ -38,7 +46,7 @@
 ## [NuGet Packages](https://www.nuget.org/) <sup>Version</sup>
 - Bootstrap <sup>[5.3.2](https://www.nuget.org/packages/bootstrap)<sup>
 - CloudinaryDotNet <sup>[1.23.0](https://www.nuget.org/packages/CloudinaryDotNet)</sup>
-- Microsoft.AspNetCore.Identity.EntityFrameworkCore <sup>[5.3.2](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity.EntityFrameworkCore)</sup>
-- Microsoft.EntityFrameworkCore <sup>[7.0.14](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore)</sup>
-- Microsoft.EntityFrameworkCore.SqlServer <sup>[7.0.14](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer)</sup>
-- Microsoft.EntityFrameworkCore.Tools <sup>[7.0.14](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Tools)</sup>
+- Microsoft.AspNetCore.Identity.EntityFrameworkCore <sup>[8.0.0](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity.EntityFrameworkCore)</sup>
+- Microsoft.EntityFrameworkCore <sup>[8.0.0](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore)</sup>
+- Microsoft.EntityFrameworkCore.SqlServer <sup>[8.0.0](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer)</sup>
+- Microsoft.EntityFrameworkCore.Tools <sup>[8.0.0](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Tools)</sup>
