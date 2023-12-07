@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using RecipeWebsite.Data;
@@ -34,11 +35,11 @@ namespace RecipeWebsite.Controllers
                 PostCard = await _context.Posts.ToListAsync()
             };
 
-            var cached = _cache.TryGetValue("post", out var post);
-            if (cached)
-            {
-                return View(post);
-            }
+            //var cached = _cache.TryGetValue("post", out var post);
+            //if (cached)
+            //{
+            //    return View(post);
+            //}
 
             return View(CardPostVM);
         }
@@ -68,9 +69,16 @@ namespace RecipeWebsite.Controllers
 
 
         // Create
-        public IActionResult Create()
+        public async Task<IActionResult> CreateAsync()
         {
-            return View();
+            // Category List
+            var CreatePostCategoryVM = new CreatePostViewModel
+            {
+                PostCategoryList = await _context.PostCategories.ToListAsync(),
+                CollectionCategoryList = await _context.CollectionCategories.ToListAsync()
+            };
+
+            return View(CreatePostCategoryVM);
         }
 
         [HttpPost]
@@ -79,7 +87,7 @@ namespace RecipeWebsite.Controllers
             if (ModelState.IsValid)
             {
                 var result = await _photoInterface.AddPhotoAsync(postVM.Image);
-
+                
                 var post = new PostModel
                 {
                     // Post
@@ -90,16 +98,17 @@ namespace RecipeWebsite.Controllers
                     Recipe = postVM.Recipe,
                     Image = result.Url.ToString(),
 
+                    // Category
+                    PostCategory = postVM.PostCategory,
+                    CollectionCategory = string.Join(',', postVM.CollectionCategory),
+
                     // Addition
                     Date = DateTime.Now,
                     View = 0,
                     Like = 0,
-                    Dislike = 0,
-
-                    // Category
-                    //PostCategory = postVM.PostCategory,
-                    //CollectionCategory = postVM.CollectionCategory,
+                    Dislike = 0
                 };
+
                 _postInterface.Add(post);
                 return RedirectToAction("Index");
             }
@@ -173,7 +182,12 @@ namespace RecipeWebsite.Controllers
                 Recipe = post.Recipe,
 
                 // Category
-                //PostCategory = post.PostCategory
+                PostCategory = post.PostCategory,
+                //CollectionCategory = string.Join(',', post.CollectionCategory),
+
+                // Category List
+                PostCategoryList = await _context.PostCategories.ToListAsync(),
+                CollectionCategoryList = await _context.CollectionCategories.ToListAsync()
             };
             return View(postVM);
         }
@@ -215,7 +229,8 @@ namespace RecipeWebsite.Controllers
                     Image = photoResult.Url.ToString(),
 
                     // Category
-                    //PostCategory = postVM.PostCategory
+                    PostCategory = postVM.PostCategory,
+                    CollectionCategory = string.Join(',', postVM.CollectionCategory)
                 };
 
                 _postInterface.Update(post);

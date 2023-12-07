@@ -37,7 +37,7 @@ namespace RecipeWebsite.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(CreateCollectionCategoryViewModel postCategoryVM)
+        public IActionResult Create(CreatePostCategoryViewModel postCategoryVM)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +65,7 @@ namespace RecipeWebsite.Controllers
 
             if (postCategory == null) return View("Error");
 
-            var postCategoryVM = new EditCollectionCategoryViewModel
+            var postCategoryVM = new EditPostCategoryViewModel
             {
                 CategoryName = postCategory.CategoryName
             };
@@ -74,7 +74,7 @@ namespace RecipeWebsite.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, EditCollectionCategoryViewModel postCategoryVM)
+        public async Task<IActionResult> Edit(int id, EditPostCategoryViewModel postCategoryVM)
         {
             if (!ModelState.IsValid)
             {
@@ -82,9 +82,9 @@ namespace RecipeWebsite.Controllers
                 return View("Edit", postCategoryVM);
             }
 
-            var userCollection = await _postCategoryInterface.GetByIdAsyncNoTracking(id);
+            var userPost = await _postCategoryInterface.GetByIdAsyncNoTracking(id);
 
-            if (userCollection != null)
+            if (userPost != null)
             {
                 var postCategory = new PostCategoryModel
                 {
@@ -114,7 +114,7 @@ namespace RecipeWebsite.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
-        public async Task<IActionResult> DeleteCollection(int id)
+        public async Task<IActionResult> DeletePost(int id)
         {
             var postCategoryDetails = await _postCategoryInterface.GetByIdAsync(id);
 

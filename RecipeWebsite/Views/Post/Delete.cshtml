@@ -54,6 +54,43 @@
                 }
             </div>
 
+
+            <!-- Collection Category -->
+            <div class="pb-3 mb-4 border-bottom">
+                <h4 class="fw-normal mb-3">
+                    <a class="link-dark">Category</a>
+                </h4>
+                <p class="h6 text-body-secondary">
+                    @Model.PostCategory
+                </p>
+            </div>
+
+            <!-- Collection Category -->
+            <div class="pb-3 mb-4 border-bottom">
+                <h4 class="fw-normal mb-3">
+                    <a class="link-dark">Recipe Tags</a>
+                </h4>
+                @if (Model.CollectionCategory != null)
+                {
+                    var tags = Model.CollectionCategory.Split(',');
+                    foreach (var tag in tags)
+                    {
+                        <button href="#" type="button" class="btn btn-outline-secondary btn-sm mb-2">@tag</button>
+                    }
+                }
+                else
+                {
+                    <p class="small text-secondary"> No tags available </p>
+                }
+            </div>
+
+            <h4 class="fw-normal mb-3">
+                <a class="link-dark" href="#recipe-image" id="recipe-image">Recipe Image</a>
+            </h4>
+            <div class="shadow p-0 mb-4">
+                <img class="img-fluid rounded" src="@Model.Image" alt="" width="540px" height="810px">
+            </div>
+
             <!-- Ingredients -->
             <h4 class="fw-normal mb-3">
                 <a class="link-dark">Recipe Ingredients</a>

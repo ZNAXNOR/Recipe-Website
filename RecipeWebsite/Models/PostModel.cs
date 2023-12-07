@@ -15,17 +15,16 @@ namespace RecipeWebsite.Models
         public string Recipe { get; set; }
         public string Image { get; set; }
 
+        // Category
+        public string PostCategory { get; set; }
+        public string? CollectionCategory { get; set; }
+
 
         // Addition
         public DateTime Date { get; set; }
         public int View { get; set; }
         public int Like { get; set; }
         public int Dislike { get; set; }
-
-
-        // Category
-        //public PostCategory PostCategory { get; set; }
-        //public CollectionCategory CollectionCategory { get; set; }
 
 
         // App User

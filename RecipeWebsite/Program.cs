@@ -13,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 var services = builder.Services;
 
-services.AddControllersWithViews().AddRazorRuntimeCompilation();
+services.AddControllersWithViews();
 
 // Collection
 services.AddScoped<ICollectionInterface, CollectionRepository>();

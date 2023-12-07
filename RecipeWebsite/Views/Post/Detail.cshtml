@@ -20,6 +20,9 @@
                         <p id="recipe-description">
                             @Html.Raw(Model.Description.Replace("\n", "<br />"))
                         </p>
+
+                        <!-- Post Category -->
+                        <p class="h5 fw-bold pt-1">Recipe Category: @Model.PostCategory </p>
                     </div>
 
                     <nav class="small" id="toc">
@@ -67,8 +70,24 @@
                 <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-smooth-scroll="true" class="scrollspy-example-2" tabindex="0">
 
                     <div class="row g-5">
+
                         <!-- Image -->
                         <div class="col-md-8 pe-5">
+
+                            <!-- Collection Category -->
+                            @if (Model.CollectionCategory != null)
+                            {
+                                var tags = Model.CollectionCategory.Split(',');
+                                foreach (var tag in tags)
+                                {
+                                    <button href="#" type="button" class="btn btn-outline-secondary btn-sm mb-2">@tag</button>
+                                }
+                            }
+                            else
+                            {
+                                <p class="small text-secondary"> No tags available </p>
+                            }
+
                             <h4 class="fw-normal mb-3">
                                 <a class="link-dark" href="#recipe-image" id="recipe-image">Recipe Image</a>
                             </h4>
@@ -120,6 +139,7 @@
                         <hr />
                         // When link is null, do not display.
                     }
+
 
                     <!-- Ingredients -->
                     <h4 class="fw-normal mb-3">
@@ -176,9 +196,7 @@
                     <h4 class="fw-normal mb-3">
                         <a class="link-dark" href="#recipe-body" id="recipe-body">Recipe</a>
                     </h4>
-                    <p class="mb-4">
-                        @Html.Raw(Model.Recipe.Replace("\n", "<br />"))
-                    </p>
+                    <p class="mb-4"> @Html.Raw(Model.Recipe.Replace("\n", "<br />")) </p>
                 </div>
 
             </nav>

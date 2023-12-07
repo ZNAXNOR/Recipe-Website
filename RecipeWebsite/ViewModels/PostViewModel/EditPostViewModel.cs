@@ -1,4 +1,6 @@
-﻿namespace RecipeWebsite.ViewModels.PostViewModel
+﻿using RecipeWebsite.Models;
+
+namespace RecipeWebsite.ViewModels.PostViewModel
 {
     public class EditPostViewModel
     {
@@ -13,7 +15,11 @@
         public string? URL { get; set; }
 
         // Category
-        //public PostCategory PostCategory { get; set; }
-        //public CollectionCategory CollectionCategory { get; set; }
+        public string PostCategory { get; set; }
+        public List<string>? CollectionCategory { get; set; }
+
+        // Category List
+        public List<PostCategoryModel>? PostCategoryList { get; set; }
+        public List<CollectionCategoryModel>? CollectionCategoryList { get; set; }
     }
 }

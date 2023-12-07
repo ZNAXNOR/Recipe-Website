@@ -46,6 +46,56 @@
                 </div>
             </div>
 
+            <!-- Post Category -->
+            <div class="col-md-12 mb-3">
+                <label asp-for="PostCategory" class="form-label">Post Category</label>
+                <br />
+                <div class="form-check-inline">
+                    @foreach (var item in Model.PostCategoryList)
+                    {
+                        <input type="radio" asp-for="PostCategory" class="btn-check" id="@item.CategoryName" value="@item.CategoryName" required>
+                        <label asp-for="PostCategory" class="btn btn-outline-primary" for="@item.CategoryName">@item.CategoryName</label>
+                    }
+                </div>
+                <div class="invalid-feedback">
+                    Please select a valid category.
+                </div>
+            </div>
+
+            <!-- Collection Category -->
+            <div class="form-group col-md-12 mb-3">
+                <label asp-for="CollectionCategory" for="myMultiselect">Collection Category</label>
+                @if (Model.CollectionCategoryList.Count != 0)
+                {
+                    <div id="myMultiselect" class="multiselect">
+                        <div id="mySelectLabel" class="selectBox" onclick="toggleCheckboxArea()">
+                            <select class="form-select">
+                                <option> #Input values go here</option>
+                            </select>
+                            <div class="overSelect"></div>
+                        </div>
+                        <div id="mySelectOptions">
+                            @foreach (var item in Model.CollectionCategoryList)
+                            {
+                                <label asp-for="CollectionCategory" for="@item.CategoryName">
+                                    <input type="checkbox" name="CollectionCategory" id="@item.CategoryName" onchange="checkboxStatusChange()" value="@item.CategoryName" required>
+                                    @item.CategoryName
+                                </label>
+                            }
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <select asp-for="CollectionCategory" class="form-select" disabled>
+                        <option>No Tags available</option>
+                    </select>
+                }
+                <div class="invalid-feedback">
+                    Please select a valid category.
+                </div>
+            </div>
+
             <!-- Ingredients -->
             <div class="col-12 mb-3">
                 <label asp-for="Ingredient" class="form-label">Ingredients</label>
@@ -93,5 +143,10 @@
 
 </form>
 
+
 <script src="~/js/created/recipeImage.js"></script>
 <script src="~/js/created/validation.js"></script>
+<script src="~/js/created/multiselect-dropdown.js"></script>
+
+<!--Added CSS-->
+<link rel="stylesheet" href="~/css/created/multiselect-dropdown.css" />
