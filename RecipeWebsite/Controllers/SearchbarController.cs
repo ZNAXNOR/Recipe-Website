@@ -13,7 +13,6 @@ namespace RecipeWebsite.Controllers
             _context = context;
         }
 
-        [HttpPost]
         public async Task<IActionResult> Index(string searchString)
         {
             var posts = from p in _context.Posts select p;
@@ -23,7 +22,9 @@ namespace RecipeWebsite.Controllers
             {
                 TempData["searchString"] = searchString;
 
-                posts = posts.Where(p => p.Title!.Contains(searchString));
+                posts = posts.Where(p => p.Title!.Contains(searchString) ||
+                                         p.Ingredient!.Contains(searchString));
+
                 collections = collections.Where(c => c.Title!.Contains(searchString));
             }
 

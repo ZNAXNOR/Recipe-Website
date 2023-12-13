@@ -15,12 +15,15 @@ namespace RecipeWebsite.Models
         public string Recipe { get; set; }
         public string Image { get; set; }
 
+
         // Category
         public string PostCategory { get; set; }
         public string? CollectionCategory { get; set; }
 
 
         // Addition
+        [Display(Name = "Upload Date")]
+        [DataType(DataType.Date)]
         public DateTime Date { get; set; }
         public int View { get; set; }
         public int Like { get; set; }

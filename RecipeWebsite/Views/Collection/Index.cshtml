@@ -24,10 +24,9 @@
 
     <!-- Search bar -->
     <div class="row justify-content-between">
-        <form class="d-flex w-50 mb-2" role="search" asp-controller="Collection" asp-action="Index">
+        <form class="d-flex w-50 mb-2" role="search" asp-controller="Collection" asp-action="Index" method="get">
             <div class="input-group pe-2">
-                <input class="form-control shadow-none" value="@TempData["searchString"]" type="search" placeholder="Search Collections" id="text-suggestion" aria-label="Search" name="SearchString"
-                       required oninvalid="this.setCustomValidity(' ')" />
+                <input class="form-control shadow-none" value="@TempData["collectionSearch"]" type="search" placeholder="Search Collections" name="SearchString" required oninvalid="this.setCustomValidity(' ')" />
                 <button class="btn btn-outline-success shadow-none" type="submit" id="search-button"><i class='bx bx-search'></i></button>
             </div>
             <a class="btn btn-outline-danger w-25" asp-area="" asp-controller="Collection" asp-action="Index"><i class='bx bx-reset'></i>Reset</a>

@@ -34,21 +34,19 @@
             {
                 <caption>Number of categories:<strong>  @Model.PostCategories.Count </strong></caption>
                 <tbody class="table-light">
-                    @{
-                        foreach (var item in Model.PostCategories)
-                        {
-                            <tr>
-                                <td>@item.Id</td>
-                                <td>@item.CategoryName Recipe</td>
-                                <td>  </td>
-                                <td>
-                                    <a class="btn btn-primary btn-sm px-4" asp-route-id="@item.Id" asp-controller="PostCategory" asp-action="Edit">Edit</a>
-                                </td>
-                                <td>
-                                    <a class="btn btn-danger btn-sm px-4" asp-route-id="@item.Id" asp-controller="PostCategory" asp-action="Delete">Delete</a>
-                                </td>
-                            </tr>
-                        }
+                    @foreach (var item in Model.PostCategories)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.CategoryName Recipe</td>
+                            <td>  </td>
+                            <td>
+                                <a class="btn btn-primary btn-sm px-4" asp-route-id="@item.Id" asp-controller="PostCategory" asp-action="Edit">Edit</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-danger btn-sm px-4" asp-route-id="@item.Id" asp-controller="PostCategory" asp-action="Delete">Delete</a>
+                            </td>
+                        </tr>
                     }
                 </tbody>
             }

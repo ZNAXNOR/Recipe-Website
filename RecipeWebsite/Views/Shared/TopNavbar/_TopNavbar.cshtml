@@ -1,4 +1,17 @@
-﻿<header style="padding-top:5px;" id="header">
+﻿@using Microsoft.Extensions.Caching.Memory
+
+@using RecipeWebsite.ViewModels.CategoryViewModel
+
+@inject IMemoryCache Cache
+
+@{
+    if (!Cache.TryGetValue("CategoryList", out CategoryViewModel categoryVM))
+    {
+        categoryVM = new CategoryViewModel();
+    }
+}
+
+<header style="padding-top:5px;" id="header">
 
     <nav class="navbar navbar-expand navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 ps-10 fixed-top">
         <div class="container-fluid">
@@ -14,27 +27,27 @@
 
                 <ul class="navbar-nav flex-grow-1">
                     <!--Search bar-->
-                    <form class="d-flex w-50 ps-lg-5" role="search" asp-controller="Searchbar" asp-action="Index">
-                        <div class="input-group">
-                            <input class="form-control shadow-none" value="@TempData["searchString"]" type="search" placeholder="Search" id="text-suggestion" aria-label="Search" name="SearchString"
-                            required oninvalid="this.setCustomValidity(' ')"/>
+                    <form class="d-flex w-50 ps-lg-5" asp-controller="Searchbar" asp-action="Index" method="get">
+                        <div class="input-group ps-lg-5">
+                            <input class="form-control shadow-none" value="@TempData["searchString"]" type="search" placeholder="Search" name="SearchString" required oninvalid="this.setCustomValidity(' ')"/>
                             <button class="btn btn-outline-success shadow-none" type="submit" id="search-button"><i class='bx bx-search'></i></button>
                         </div>
                     </form>
 
                     <!-- Dropdown -->
-                    <form class="w-25 ps-lg-5" asp-controller="Filter" asp-action="Index" id="category">
-                        <div class="input-group">
+                    <form class="ps-lg-5" asp-controller="Filter" asp-action="Index" id="category" method="get">
+                        <div class="input-group ps-lg-5">
                             <select class="form-control shadow-none" name="postCategory" id="post-filter">
                                 <option>All</option>
-                                @* @foreach (var value in Enum.GetValues(typeof(PostCategory)))
+                                @foreach (var item in categoryVM.PostCategories)
                                 {
-                                    <!option value="@value" @(value.ToString() == ViewBag.PostCategory?.ToString() ? "selected" : "")>@value</!option>
-                                } *@
+                                    <option>@item.CategoryName</option>
+                                }
                             </select>
-                            <button class="btn btn-outline-success shadow-none me-2" type="submit">Filter</button>
+                            <button class="btn btn-outline-success shadow-none me-2" type="submit"><i class='bx bx-filter'></i></button>
                         </div>
                     </form>
+
                 </ul>
 
                 <!--Identity-->

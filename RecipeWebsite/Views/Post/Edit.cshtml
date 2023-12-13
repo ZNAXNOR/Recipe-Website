@@ -78,7 +78,7 @@
                             @foreach (var item in Model.CollectionCategoryList)
                             {
                                 <label asp-for="CollectionCategory" for="@item.CategoryName">
-                                    <input type="checkbox" name="CollectionCategory" id="@item.CategoryName" onchange="checkboxStatusChange()" value="@item.CategoryName" required>
+                                    <input type="checkbox" name="CollectionCategory" id="@item.CategoryName" onchange="checkboxStatusChange()" value="@item.CategoryName">
                                     @item.CategoryName
                                 </label>
                             }

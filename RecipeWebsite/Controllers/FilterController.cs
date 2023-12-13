@@ -1,40 +1,48 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using RecipeWebsite.Data;
+using RecipeWebsite.ViewModels.CardsViewModel;
 
 namespace RecipeWebsite.Controllers
 {
     public class FilterController : Controller
     {
-        //private readonly IMemoryCache _cache;
-        //private readonly ApplicationDbContext _context;
+        private readonly IMemoryCache _cache;
+        private readonly ApplicationDbContext _context;
 
-        //public FilterController(ApplicationDbContext context, IMemoryCache cache)
-        //{
-        //    _context = context;
-        //    _cache = cache;
-        //}
+        public FilterController(ApplicationDbContext context, IMemoryCache cache)
+        {
+            _context = context;
+            _cache = cache;
+        }
 
-        //[HttpPost]
-        //public IActionResult Index(PostCategory? postCategory)
-        //{
-        //    List<Post> post;
+        public async Task<IActionResult> Index(string postCategory)
+        {
+            ViewBag.PostCategory = postCategory;
 
-        //    if (postCategory != null)
-        //    {
-        //        post = _context.Posts.Where(c => c.PostCategory == postCategory).ToList();
-        //    }
-        //    else
-        //    {
-        //        post = _context.Posts.ToList();
-        //    }
 
-        //    _cache.Set("post", post);
-        //    ViewBag.PostCategory = postCategory;
+            var filteredPost = from p in _context.Posts select p;
 
-        //    string url = Request.Headers["Referer"].ToString();
+            if (postCategory == "All")
+            {
+                filteredPost = _context.Posts;
+            }
+            else if (!string.IsNullOrEmpty(postCategory))
+            {
+                filteredPost = filteredPost.Where(p => p.PostCategory == postCategory);
+            }
 
-        //    return Redirect(url);
-        //}
+            var filteredCategory = new CardsViewModel
+            {
+                PostCard = await filteredPost.ToListAsync()
+            };
+
+            _cache.Set("filteredCategory", filteredCategory);
+
+            string url = Request.Headers["Referer"].ToString();
+
+            return Redirect(url);
+        }
     }
 }

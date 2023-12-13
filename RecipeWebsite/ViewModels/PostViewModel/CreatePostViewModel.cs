@@ -20,5 +20,10 @@ namespace RecipeWebsite.ViewModels.PostViewModel
         // Category List
         public List<PostCategoryModel>? PostCategoryList { get; set; }
         public List<CollectionCategoryModel>? CollectionCategoryList { get; set; }
+
+        // Addition
+        public int View { get; set; }
+        public int Like { get; set; }
+        public int Dislike { get; set; }
     }
 }

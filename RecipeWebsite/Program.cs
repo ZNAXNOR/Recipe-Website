@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using RecipeWebsite.Data;
 using RecipeWebsite.Helpers;
 using RecipeWebsite.Interfaces;
 using RecipeWebsite.Repositories;
 using RecipeWebsite.Services;
+using RecipeWebsite.ViewModels.CategoryViewModel;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -57,6 +59,33 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+// Global variable
+#region Global variable
+
+using (var scope = app.Services.CreateScope())
+{
+    var serviceProvider = scope.ServiceProvider;
+
+    try
+    {
+        var _context = serviceProvider.GetRequiredService<ApplicationDbContext>();
+        var _cache = serviceProvider.GetRequiredService<IMemoryCache>();
+
+        var categoryVM = new CategoryViewModel
+        {
+            PostCategories = _context.PostCategories.ToList()
+        };
+
+        _cache.Set("CategoryList", categoryVM);
+    }
+    catch (Exception ex)
+    {
+        // Handle exceptions (logging, etc.)
+    }
+}
+
+#endregion
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

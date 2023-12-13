@@ -23,26 +23,14 @@ namespace RecipeWebsite.Controllers
 
 
         // Index
-        public async Task<IActionResult> Index()
-        {
-            var CardPostVM = new CardsViewModel
-            {
-                CollectionCard = await _context.Collections.ToListAsync()
-            };
-
-            return View(CardPostVM);
-        }
-
-
-        // Search Bar
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> Index(string searchString)
         {
             var collections = from c in _context.Collections select c;
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                TempData["searchString"] = searchString;
+                TempData["collectionSearch"] = searchString;
 
                 collections = collections.Where(s => s.Title!.Contains(searchString));
             }
@@ -54,6 +42,7 @@ namespace RecipeWebsite.Controllers
 
             return View(CardPostVM);
         }
+
 
         // Detail
         public async Task<IActionResult> Detail(int id)

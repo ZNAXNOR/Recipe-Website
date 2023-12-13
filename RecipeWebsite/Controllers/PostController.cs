@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using RecipeWebsite.Data;
@@ -30,37 +29,40 @@ namespace RecipeWebsite.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            // Category filtered Posts
+            var cached = _cache.TryGetValue("filteredCategory", out var filteredCategory);
+
+            if (cached)
+            {
+                return View(filteredCategory);
+            }
+
+
+            // All Posts
             var CardPostVM = new CardsViewModel
             {
                 PostCard = await _context.Posts.ToListAsync()
             };
 
-            //var cached = _cache.TryGetValue("post", out var post);
-            //if (cached)
-            //{
-            //    return View(post);
-            //}
-
             return View(CardPostVM);
         }
-
 
         // Searchbar
         [HttpPost]
         public async Task<IActionResult> Index(string searchString)
         {
-            var post = from p in _context.Posts select p;
+            TempData["postSearch"] = searchString;
 
-            // Searchbar
+            var post = from p in _context.Posts select p;
+                        
             if (!string.IsNullOrEmpty(searchString))
             {
-                TempData["searchString"] = searchString;
-
-                post = post.Where(t => t.Title!.Contains(searchString));
+                post = post.Where( t => t.Title!.Contains(searchString) ||
+                                        t.Ingredient!.Contains(searchString));
             }
 
             var CardPostVM = new CardsViewModel
-            {                
+            {
                 PostCard = await post.ToListAsync()
             };
 
@@ -69,6 +71,7 @@ namespace RecipeWebsite.Controllers
 
 
         // Create
+        [HttpGet]
         public async Task<IActionResult> CreateAsync()
         {
             // Category List
@@ -82,6 +85,7 @@ namespace RecipeWebsite.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreatePostViewModel postVM)
         {
             if (ModelState.IsValid)
@@ -104,9 +108,9 @@ namespace RecipeWebsite.Controllers
 
                     // Addition
                     Date = DateTime.Now,
-                    View = 0,
-                    Like = 0,
-                    Dislike = 0
+                    View = postVM.View,
+                    Like = postVM.Like,
+                    Dislike = postVM.Dislike
                 };
 
                 _postInterface.Add(post);
@@ -126,7 +130,7 @@ namespace RecipeWebsite.Controllers
         {
             PostModel post = await _postInterface.GetByIdAsync(id);
 
-            post.View++;
+            post.View = post.View + 1;
 
             _context.Update(post);
             await _context.SaveChangesAsync();
@@ -140,6 +144,7 @@ namespace RecipeWebsite.Controllers
             PostModel post = await _postInterface.GetByIdAsync(id);
 
             post.Like++;
+            post.View--;
 
             _context.Update(post);
             await _context.SaveChangesAsync();
@@ -155,6 +160,7 @@ namespace RecipeWebsite.Controllers
             PostModel post = await _postInterface.GetByIdAsync(id);
 
             post.Dislike++;
+            post.View--;
 
             _context.Update(post);
             await _context.SaveChangesAsync();
@@ -166,10 +172,15 @@ namespace RecipeWebsite.Controllers
 
 
         // Edit
+        [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
             var post = await _postInterface.GetByIdAsync(id);
-            if (post == null) return View("Error");
+
+            if (post == null)
+            {
+                return View("Error");
+            }
 
             var postVM = new EditPostViewModel
             {
@@ -185,6 +196,12 @@ namespace RecipeWebsite.Controllers
                 PostCategory = post.PostCategory,
                 //CollectionCategory = string.Join(',', post.CollectionCategory),
 
+                // Addition
+                Date = post.Date,
+                View = post.View,
+                Like = post.Like,
+                Dislike = post.Dislike,
+
                 // Category List
                 PostCategoryList = await _context.PostCategories.ToListAsync(),
                 CollectionCategoryList = await _context.CollectionCategories.ToListAsync()
@@ -193,6 +210,7 @@ namespace RecipeWebsite.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, EditPostViewModel postVM)
         {
             if (!ModelState.IsValid)
@@ -230,7 +248,13 @@ namespace RecipeWebsite.Controllers
 
                     // Category
                     PostCategory = postVM.PostCategory,
-                    CollectionCategory = string.Join(',', postVM.CollectionCategory)
+                    CollectionCategory = string.Join(',', postVM.CollectionCategory),
+
+                    // Addition
+                    Date = postVM.Date,
+                    View = postVM.View,
+                    Like = postVM.Like,
+                    Dislike = postVM.Dislike,
                 };
 
                 _postInterface.Update(post);
@@ -245,18 +269,29 @@ namespace RecipeWebsite.Controllers
 
 
         // Delete
+        [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
             var postDetails = await _postInterface.GetByIdAsync(id);
-            if (postDetails == null) return View("Error");
+
+            if (postDetails == null)
+            {
+                return View("Error");
+            }
+
             return View(postDetails);
         }
 
         [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeletePost(int id)
         {
             var postDetails = await _postInterface.GetByIdAsync(id);
-            if (postDetails == null) return View("Error");
+
+            if (postDetails == null)
+            {
+                return View("Error");
+            }
 
             _postInterface.Delete(postDetails);
             return RedirectToAction("Index");
