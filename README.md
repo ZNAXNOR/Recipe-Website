@@ -36,7 +36,7 @@
 ---
 
 ## Task
-- [x] Recipe Post
+- ![Posts](https://github.com/ZNAXNOR/Recipe-Website/issues/1)
 - [ ] Recipe Videos
 - [ ] Recipe Collection
 - [ ] Blogs
@@ -108,8 +108,8 @@
 - **Resources used**
   - Host: smtp.gmail.com [^Host]
   - Port: 587 [^Port] 
-  - Username": _App secret account Email_
-  - Password": _App secret_  
+  - Username: _App secret account Email_
+  - Password: _App secret_  
 - Source Code: [GitHub Repository for Google SMTP].
 
 [Google SMTP]: https://myaccount.google.com/apppasswords
