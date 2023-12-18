@@ -1,5 +1,37 @@
-# Recipe Website <sup>2</sup>
-> <sub>_migrating repository [RecipeWebsite] complete. Further project progress will be made here_<sub>
+<h1 align='center'> Recipe Website <sup>2</sup> </h1>
+  
+<h3 align='center'> Database </h3>
+<p align='center'>
+  <a href="#">
+      <img src="https://img.shields.io/badge/Microsoft%20SQL%20Server-CC2927?style=for-the-badge&logo=microsoft%20sql%20server&logoColor=white" />        
+  </a>
+</p>
+
+<h3 align='center'> Languages </h3>
+<p align='center'>
+  <a href="#">
+      <img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white" />
+  </a> 
+  &nbsp;&nbsp;
+  <a href="#">
+      <img src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E" />        
+  </a>
+  &nbsp;&nbsp;
+  <a href="#">
+      <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />        
+  </a>
+  &nbsp;&nbsp;
+  <a href="#">
+      <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" />        
+  </a>
+</p>
+
+<h3 align='center'> Framework </h3>
+<p align='center'>
+  <a href="#">
+      <img src="https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" />        
+  </a>
+</p>
 
 ### This project is being created using [ASP.NET Core] ( [MVC] )
 
@@ -36,15 +68,25 @@
 ---
 
 ## Task
-- [x] Recipe Post
-- [ ] Recipe Videos
-- [ ] Recipe Collection
-- [ ] Blogs
-- [x] Filter
-- [x] User Accounts
-- [ ] User Settings
-- [x] User Feedback
-- [ ] UI/UX
+<sub> Tasks are located in **[Issues]**. Click/Hover over them for more information </sub>
+- **[Posts]**
+- **[Recipe Videos]**
+- **[Recipe Collection]**
+- **[Blogs]**
+- **[Filter]**
+- **[User Accounts]**
+- **[User Feedback]**
+- **[UI/UX]**
+
+[Issues]: https://github.com/ZNAXNOR/Recipe-Website/issues
+[Posts]: https://github.com/ZNAXNOR/Recipe-Website/issues/1
+[Recipe Videos]: https://github.com/ZNAXNOR/Recipe-Website/issues/8
+[Recipe Collection]: https://github.com/ZNAXNOR/Recipe-Website/issues/3
+[Blogs]: https://github.com/ZNAXNOR/Recipe-Website/issues/11
+[Filter]: https://github.com/ZNAXNOR/Recipe-Website/issues/2
+[User Accounts]: https://github.com/ZNAXNOR/Recipe-Website/issues/9
+[User Feedback]: https://github.com/ZNAXNOR/Recipe-Website/issues/7
+[UI/UX]: https://github.com/ZNAXNOR/Recipe-Website/issues/10
 
 ---
 
@@ -108,8 +150,8 @@
 - **Resources used**
   - Host: smtp.gmail.com [^Host]
   - Port: 587 [^Port] 
-  - Username": _App secret account Email_
-  - Password": _App secret_  
+  - Username: _App secret account Email_
+  - Password: _App secret_  
 - Source Code: [GitHub Repository for Google SMTP].
 
 [Google SMTP]: https://myaccount.google.com/apppasswords
