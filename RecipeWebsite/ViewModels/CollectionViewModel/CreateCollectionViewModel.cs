@@ -9,6 +9,6 @@
         public IFormFile Image { get; set; }
 
         // Collection
-        //public CollectionCategory CollectionCategory { get; set; }
+        //public Tags Tags { get; set; }
     }
 }

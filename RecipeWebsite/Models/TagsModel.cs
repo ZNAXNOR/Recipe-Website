@@ -2,11 +2,12 @@
 
 namespace RecipeWebsite.Models
 {
-    public class CollectionCategoryModel
+    public class TagsModel
     {
         // Collection
         [Key]
         public int Id { get; set; }
-        public string CategoryName { get; set; }
+        public string TagsName { get; set; }
+        public string? TagsDescription { get; set; }
     }
 }

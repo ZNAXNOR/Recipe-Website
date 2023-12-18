@@ -63,8 +63,8 @@
 
             <!-- Collection Category -->
             <div class="form-group col-md-12 mb-3">
-                <label asp-for="CollectionCategory" for="myMultiselect">Collection Category</label>
-                @if (Model.CollectionCategoryList.Count != 0)
+                <label asp-for="Tags" for="myMultiselect">Collection Category</label>
+                @if (Model.TagsList.Count != 0)
                 {
                     <div id="myMultiselect" class="multiselect">
                         <div id="mySelectLabel" class="selectBox" onclick="toggleCheckboxArea()">
@@ -74,11 +74,11 @@
                             <div class="overSelect"></div>
                         </div>
                         <div id="mySelectOptions">
-                            @foreach (var item in Model.CollectionCategoryList)
+                            @foreach (var item in Model.TagsList)
                             {
-                                <label asp-for="CollectionCategory" for="@item.CategoryName">
-                                    <input type="checkbox" name="CollectionCategory" id="@item.CategoryName" onchange="checkboxStatusChange()" value="@item.CategoryName">
-                                    @item.CategoryName
+                                <label asp-for="Tags" for="@item.TagsName">
+                                    <input type="checkbox" name="Tags" id="@item.TagsName" onchange="checkboxStatusChange()" value="@item.TagsName">
+                                    @item.TagsName
                                 </label>
                             }
                         </div>
@@ -86,7 +86,7 @@
                 }
                 else
                 {
-                    <select asp-for="CollectionCategory" class="form-select" disabled>
+                    <select asp-for="Tags" class="form-select" disabled>
                         <option>No Tags available</option>
                     </select>
                 }

@@ -67,11 +67,11 @@ namespace RecipeWebsite.Controllers
                 var collection = new CollectionModel
                 {
                     Title = collectionVM.Title,
-                    Description = collectionVM.Description,                    
+                    Description = collectionVM.Description,
                     Image = result.Url.ToString(),
 
                     // Category
-                    //CollectionCategory = collectionVM.CollectionCategory
+                    //Tags = collectionVM.Tags
                 };
                 _collectionInterface.Add(collection);
                 return RedirectToAction("Index");
@@ -96,7 +96,7 @@ namespace RecipeWebsite.Controllers
                 URL = collection.Image,
 
                 // Category
-                //CollectionCategory = collection.CollectionCategory
+                //Tags = collection.Tags
             };
             return View(collectionVM);
         }
@@ -133,7 +133,7 @@ namespace RecipeWebsite.Controllers
                     Image = photoResult.Url.ToString(),
 
                     // Category
-                    //CollectionCategory = collectionVM.CollectionCategory
+                    //Tags = collectionVM.Tags
                 };
 
                 _collectionInterface.Update(collection);

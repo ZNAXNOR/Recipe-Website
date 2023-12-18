@@ -14,7 +14,7 @@ namespace RecipeWebsite.Models
 
 
         // Category
-        //public CollectionCategory CollectionCategory { get; set; }
+        //public Tags Tags { get; set; }
 
 
         // App User

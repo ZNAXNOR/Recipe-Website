@@ -1,4 +1,4 @@
-﻿@model CollectionCategoryModel
+﻿@model TagsModel
 
 <!-- Header -->
 <div class="py-5 text-center">
@@ -10,18 +10,26 @@
     <div class="row g-5">
         <div class="p-4 p-md-5 border rounded-3 bg-body-tertiary">
 
-            <!-- Category Name -->
+            <!-- Tags Name -->
             <h4 class="fw-normal mb-3">
-                <a class="link-dark">Category Name</a>
+                <a class="link-dark">Tags Name</a>
             </h4>
             <p class="h3 pb-3 mb-4 border-bottom">
-                @Html.Raw(Model.CategoryName)
+                @Model.TagsName
+            </p>
+
+            <!-- Tags Description -->
+            <h4 class="fw-normal mb-3">
+                <a class="link-dark">Tags Description</a>
+            </h4>
+            <p class="h3 pb-3 mb-4 border-bottom">
+                @Model.TagsDescription
             </p>
 
             <!-- Delete -->
             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
                 <button type="button" class="btn btn-danger btn-lg px-4 gap-3" data-bs-toggle="modal" data-bs-target="#recipeDeleteModal">Delete Recipe</button>
-                <a class="btn btn-secondary btn-lg px-4" asp-area="" asp-controller="CollectionCategory" asp-action="Index">Cancel</a>
+                <a class="btn btn-secondary btn-lg px-4" asp-controller="Tags" asp-action="Index">Cancel</a>
             </div>
 
             <!-- Delete Confirmation -->
@@ -35,7 +43,7 @@
                         </div>
                         <!-- Model Body -->
                         <div class="modal-body">
-                            <p class="fs-4">Are you sure you want to delete <strong>@Model.CategoryName</strong> ?</p>
+                            <p class="fs-4">Are you sure you want to delete <strong>@Model.TagsName</strong> ?</p>
                             <p class="fst-italic"><small>This action<code> cannot be reverted</code>.</small></p>
                         </div>
                         <!-- Model Buttons -->

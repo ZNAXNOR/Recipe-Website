@@ -10,6 +10,6 @@
         public string? URL { get; set; }
 
         // Category
-        //public CollectionCategory CollectionCategory { get; set; }
+        //public Tags Tags { get; set; }
     }
 }

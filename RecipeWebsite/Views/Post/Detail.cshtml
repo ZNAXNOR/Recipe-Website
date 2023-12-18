@@ -75,9 +75,9 @@
                         <div class="col-md-8 pe-5">
 
                             <!-- Collection Category -->
-                            @if (Model.CollectionCategory != null)
+                            @if (Model.Tags != null)
                             {
-                                var tags = Model.CollectionCategory.Split(',');
+                                var tags = Model.Tags.Split(',');
                                 foreach (var tag in tags)
                                 {
                                     <button href="#" type="button" class="btn btn-outline-secondary btn-sm mb-2">@tag</button>

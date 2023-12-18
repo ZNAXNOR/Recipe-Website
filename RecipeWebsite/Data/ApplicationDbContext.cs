@@ -17,7 +17,7 @@ namespace RecipeWebsite.Data
         public DbSet<PostModel> Posts { get; set; }
 
         // Category
-        public DbSet<CollectionCategoryModel> CollectionCategories { get; set; }
+        public DbSet<TagsModel> RecipeTags { get; set; }
         public DbSet<PostCategoryModel> PostCategories { get; set; }
     }
 }

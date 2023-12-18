@@ -15,9 +15,9 @@
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <p class="small text-secondary">@item.PostCategory</p>
                 </div>
-                @if (item.CollectionCategory != null)
+                @if (item.Tags != null)
                 {
-                    var tags = item.CollectionCategory.Split(',');
+                    var tags = item.Tags.Split(',');
                     foreach (var tag in tags)
                     {
                         <button href="#" type="button" class="btn btn-outline-secondary btn-sm mb-2">@tag</button>

@@ -70,9 +70,9 @@
                 <h4 class="fw-normal mb-3">
                     <a class="link-dark">Recipe Tags</a>
                 </h4>
-                @if (Model.CollectionCategory != null)
+                @if (Model.Tags != null)
                 {
-                    var tags = Model.CollectionCategory.Split(',');
+                    var tags = Model.Tags.Split(',');
                     foreach (var tag in tags)
                     {
                         <button href="#" type="button" class="btn btn-outline-secondary btn-sm mb-2">@tag</button>

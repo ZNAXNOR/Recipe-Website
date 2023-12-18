@@ -10,44 +10,46 @@
             <h1 class="display-6 fw-bold text-body-emphasis lh-1 mb-4"> Collection Categories </h1>
             <p class="lead fst-italic"> All collection categories are displayed here </p>
             <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                <a asp-controller="CollectionCategory" asp-action="Create" type="button" class="btn btn-success btn-lg px-4 me-md-2"><i class='bx bxs-edit-alt'></i> Create Collection Category </a>
+                <a asp-controller="Tags" asp-action="Create" type="button" class="btn btn-success btn-lg px-4 me-md-2"><i class='bx bxs-edit-alt'></i> Create Collection Category </a>
             </div>
         </div>
     </div>
 
-    <!-- Collection Categories -->
+    <!-- Tags -->
     <h4 class="fw-normal mb-3">
-        <a class="link-dark" href="#recipe-ingredients" id="recipe-ingredients">Collection Categories</a>
+        <a class="link-dark" href="#recipe-ingredients" id="recipe-ingredients"> Tags </a>
     </h4>
     <div class="pb-3 mb-4 border-bottom">
         <table class="table caption-top">
             <thead class="table-dark">
                 <tr>
                     <th scope="col">Id</th>
-                    <th scope="col">Category Name</th>
+                    <th scope="col">Tags Name</th>
                     <th scope="col">Number of recipes</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
+                    <th scope="col"> </th>
+                    <th scope="col"> </th>
                 </tr>
             </thead>
-            @if (Model.CollectionCategories.Count != 0)
+            @if (Model.RecipeTags.Count != 0)
             {
-                <caption>Number of categories:<strong>  @Model.CollectionCategories.Count </strong></caption>
+                <caption>Number of categories:<strong>  @Model.RecipeTags.Count </strong></caption>
                 <tbody class="table-light">
                     @{
-                        foreach (var item in Model.CollectionCategories)
+                        var i = 1;
+                        foreach (var item in Model.RecipeTags)
                         {
                             <tr>
-                                <td>@item.Id</td>
-                                <td>@item.CategoryName Recipe</td>
+                                <td>@i</td>
+                                <td>@item.TagsName Recipe</td>
                                 <td>  </td>
                                 <td>
-                                    <a class="btn btn-primary btn-sm px-4" asp-route-id="@item.Id" asp-controller="CollectionCategory" asp-action="Edit">Edit</a>
+                                    <a class="btn btn-primary btn-sm px-4" asp-route-id="@item.Id" asp-controller="Tags" asp-action="Edit">Edit</a>
                                 </td>
                                 <td>
-                                    <a class="btn btn-danger btn-sm px-4" asp-route-id="@item.Id" asp-controller="CollectionCategory" asp-action="Delete">Delete</a>
+                                    <a class="btn btn-danger btn-sm px-4" asp-route-id="@item.Id" asp-controller="Tags" asp-action="Delete">Delete</a>
                                 </td>
                             </tr>
+                            i++;
                         }
                     }
                 </tbody>

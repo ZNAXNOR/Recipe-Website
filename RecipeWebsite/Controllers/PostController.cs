@@ -78,7 +78,7 @@ namespace RecipeWebsite.Controllers
             var CreatePostCategoryVM = new CreatePostViewModel
             {
                 PostCategoryList = await _context.PostCategories.ToListAsync(),
-                CollectionCategoryList = await _context.CollectionCategories.ToListAsync()
+                TagsList = await _context.RecipeTags.ToListAsync()
             };
 
             return View(CreatePostCategoryVM);
@@ -104,7 +104,7 @@ namespace RecipeWebsite.Controllers
 
                     // Category
                     PostCategory = postVM.PostCategory,
-                    CollectionCategory = string.Join(',', postVM.CollectionCategory),
+                    Tags = string.Join(',', postVM.Tags),
 
                     // Addition
                     Date = DateTime.Now,
@@ -194,7 +194,7 @@ namespace RecipeWebsite.Controllers
 
                 // Category
                 PostCategory = post.PostCategory,
-                //CollectionCategory = string.Join(',', post.CollectionCategory),
+                //Tags = string.Join(',', post.Tags),
 
                 // Addition
                 Date = post.Date,
@@ -204,7 +204,7 @@ namespace RecipeWebsite.Controllers
 
                 // Category List
                 PostCategoryList = await _context.PostCategories.ToListAsync(),
-                CollectionCategoryList = await _context.CollectionCategories.ToListAsync()
+                TagsList = await _context.RecipeTags.ToListAsync()
             };
             return View(postVM);
         }
@@ -248,7 +248,7 @@ namespace RecipeWebsite.Controllers
 
                     // Category
                     PostCategory = postVM.PostCategory,
-                    CollectionCategory = string.Join(',', postVM.CollectionCategory),
+                    Tags = string.Join(',', postVM.Tags),
 
                     // Addition
                     Date = postVM.Date,

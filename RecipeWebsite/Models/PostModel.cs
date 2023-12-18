@@ -18,7 +18,7 @@ namespace RecipeWebsite.Models
 
         // Category
         public string PostCategory { get; set; }
-        public string? CollectionCategory { get; set; }
+        public string? Tags { get; set; }
 
 
         // Addition

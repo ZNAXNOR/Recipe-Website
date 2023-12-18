@@ -23,8 +23,8 @@ services.AddScoped<ICollectionInterface, CollectionRepository>();
 // Post
 services.AddScoped<IPostInterface, PostRepository>();
 
-// Collection Category
-services.AddScoped<ICollectionCategoryInterface, CollectionCategoryRepository>();
+// Tags
+services.AddScoped<ITagsInterface, TagsRepository>();
 
 // Post Category
 services.AddScoped<IPostCategoryInterface, PostCategoryRepository>();
