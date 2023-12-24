@@ -18,6 +18,6 @@ namespace RecipeWebsite.Data
 
         // Category
         public DbSet<TagsModel> RecipeTags { get; set; }
-        public DbSet<PostCategoryModel> PostCategories { get; set; }
+        public DbSet<CategoryModel> RecipeCategories { get; set; }
     }
 }

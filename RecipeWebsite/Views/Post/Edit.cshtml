@@ -46,15 +46,15 @@
                 </div>
             </div>
 
-            <!-- Post Category -->
+            <!-- Recipe Category -->
             <div class="col-md-12 mb-3">
-                <label asp-for="PostCategory" class="form-label">Post Category</label>
+                <label asp-for="Category" class="form-label">Post Category</label>
                 <br />
                 <div class="form-check-inline">
-                    @foreach (var item in Model.PostCategoryList)
+                    @foreach (var item in Model.CategoryList)
                     {
-                        <input type="radio" asp-for="PostCategory" class="btn-check" id="@item.CategoryName" value="@item.CategoryName" required>
-                        <label asp-for="PostCategory" class="btn btn-outline-primary" for="@item.CategoryName">@item.CategoryName</label>
+                        <input type="radio" asp-for="Category" class="btn-check" id="@item.CategoryName" value="@item.CategoryName" required>
+                        <label asp-for="Category" class="btn btn-outline-primary" for="@item.CategoryName">@item.CategoryName</label>
                     }
                 </div>
                 <div class="invalid-feedback">

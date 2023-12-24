@@ -27,7 +27,7 @@ services.AddScoped<IPostInterface, PostRepository>();
 services.AddScoped<ITagsInterface, TagsRepository>();
 
 // Post Category
-services.AddScoped<IPostCategoryInterface, PostCategoryRepository>();
+services.AddScoped<ICategoryInterface, CategoryRepository>();
 
 // Photo
 services.AddScoped<IPhotoInterface, PhotoService>();
@@ -74,7 +74,7 @@ using (var scope = app.Services.CreateScope())
 
         var categoryVM = new GenereViewModel
         {
-            PostCategories = _context.PostCategories.ToList()
+            PostCategories = _context.RecipeCategories.ToList()
         };
 
         _cache.Set("CategoryList", categoryVM);

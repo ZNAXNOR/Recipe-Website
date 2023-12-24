@@ -15,11 +15,11 @@ namespace RecipeWebsite.ViewModels.PostViewModel
         public string? URL { get; set; }
 
         // Category
-        public string PostCategory { get; set; }
+        public int Category { get; set; }
         public List<string>? Tags { get; set; }
 
         // Category List
-        public List<PostCategoryModel>? PostCategoryList { get; set; }
+        public List<CategoryModel>? CategoryList { get; set; }
         public List<TagsModel>? TagsList { get; set; }
 
         // Addition

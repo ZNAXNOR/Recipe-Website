@@ -18,17 +18,20 @@
                 
                 <div class="d-flex justify-content-between align-items-center mb-2">
 
-                    <p class="small text-secondary">@item.PostCategory</p>
+                    <p class="small text-secondary">@item.Category</p>
 
                 </div>
                 
                 @if (item.Tags != null)
                 {
                     var tags = item.Tags.Split(',');
+
                     foreach (var tag in tags)
                     {
                         int tagInt = Int32.Parse(tag);
+
                         var tagId = Model.Tags?.FirstOrDefault(p => p.Id == tagInt);
+
                         var tagName = tagId?.TagsName;
 
                         @if (tagName != null)

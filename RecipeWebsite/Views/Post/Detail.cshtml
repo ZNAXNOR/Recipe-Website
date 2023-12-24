@@ -5,6 +5,7 @@
 <!-- Page Content -->
 @{
     var postInfo = Model.Posts;
+
     var postTags = Model.Tags;
 }
 
@@ -34,8 +35,8 @@
                         
                         </p>
 
-                        <!-- Post Category -->
-                        <p class="h5 fw-bold pt-1">Recipe Category: @postInfo.PostCategory </p>
+                        <!-- Recipe Category -->
+                        <p class="h5 fw-bold pt-1">Recipe Category: @postInfo.Category </p>
                     
                     </div>
 
@@ -51,9 +52,19 @@
                                 <!-- SubCategory-1 -->
                                 <nav class="nav nav-pills flex-column">                                    
                                     <ul class="list-unstyled ps-3 collapse" id="contents-collapse">
-                                        <li><a class="d-inline-flex align-items-center rounded text-decoration-none" href="#recipe-image">Image</a></li>
-                                        <li><a class="d-inline-flex align-items-center rounded text-decoration-none" href="#youtube-recipe-link">Youtube link</a></li>
-                                        <li><a class="d-inline-flex align-items-center rounded text-decoration-none" href="#recipe-category">Category</a></li>
+
+                                        <li>
+                                            <a class="d-inline-flex align-items-center rounded text-decoration-none" href="#recipe-image">Image</a>
+                                        </li>
+
+                                        <li>
+                                            <a class="d-inline-flex align-items-center rounded text-decoration-none" href="#youtube-recipe-link">Youtube link</a>
+                                        </li>
+
+                                        <li>
+                                            <a class="d-inline-flex align-items-center rounded text-decoration-none" href="#recipe-category">Category</a>
+                                        </li>
+
                                     </ul>                                
                                 </nav>
 
@@ -67,8 +78,14 @@
                                 
                                 <!-- SubCategory-2 -->
                                 <ul class="list-unstyled ps-3 collapse" id="forms-collapse">
-                                    <li><a class="d-inline-flex align-items-center rounded text-decoration-none" href="#recipe-ingredients">Ingredients</a></li>
-                                    <li><a class="d-inline-flex align-items-center rounded text-decoration-none" href="#recipe-body">Recipe</a></li>
+
+                                    <li>
+                                        <a class="d-inline-flex align-items-center rounded text-decoration-none" href="#recipe-ingredients">Ingredients</a>
+                                    </li>
+
+                                    <li>
+                                        <a class="d-inline-flex align-items-center rounded text-decoration-none" href="#recipe-body">Recipe</a>
+                                    </li>
                                 
                                 </ul>
 
@@ -103,6 +120,7 @@
                                 foreach (var tag in tags)
                                 {
                                     var tagId = postTags?.FirstOrDefault(p => p.Id == int.Parse(tag));
+
                                     var tagName = tagId?.TagsName;
 
                                     @if (tagName != null)
@@ -122,6 +140,7 @@
                             </h4>
                             
                             <div class="shadow p-0 mb-4">
+
                                 <img class="img-fluid rounded" src="@postInfo.Image" alt="" width="540" height="810">
                             
                             </div>
@@ -132,15 +151,21 @@
 
                             @{
                                 var upload_date = @postInfo.Date.ToString("dd/MM/yyyy");
+
                                 var views = postInfo.View;
+
                                 var likes = postInfo.Like;
+
                                 var dislikes = postInfo.Dislike;
 
                                 var votes = likes + dislikes;
                             }
 
                             <!-- Date Uploaded -->
-                            <p class="h6 fw-bold pt-lg-5">Date uploaded: <br />@upload_date</p>
+                            <p class="h6 fw-bold pt-lg-5">Date uploaded: 
+                                <br />
+                                @upload_date
+                            </p>
 
                             <!-- Views -->
                             <p class="h6 fw-bold pt-lg-5">Views: @views</p>
@@ -152,10 +177,12 @@
                                 
                                 <!-- Like -->
                                 <input type="checkbox" class="btn-check" id="Likebtn" name="Votegroup[]" autocomplete="off">
+
                                 <a asp-controller="Post" asp-action="Like" asp-route-id="@postInfo.Id" class="btn btn-outline-success btn-sm shadow-none" for="Likebtn" onclick="Like(@postInfo.Id, true)">@likes Likes</a>
                                 
                                 <!-- Dislike -->
                                 <input type="checkbox" class="btn-check" id="Dislikebtn" name="Votegroup[]" autocomplete="off">
+
                                 <a asp-controller="Post" asp-action="Dislike" asp-route-id="@postInfo.Id" class="btn btn-outline-danger btn-sm shadow-none" for="Dislikebtn">@dislikes Dislikes</a>
                             
                             </div>
@@ -179,40 +206,54 @@
 
                     <!-- Ingredients -->
                     <h4 class="fw-normal mb-3">
+
                         <a class="link-dark" href="#recipe-ingredients" id="recipe-ingredients">Recipe Ingredients</a>
+
                     </h4>
                     
                     <div class="pb-3 mb-4 border-bottom">
+
                         <table class="table">
+
                             <thead class="table-dark">
                                 <tr>
                                     <th scope="col">#</th>
+
                                     <th scope="col">Ingredient Name</th>
+
                                     <th scope="col">Ingredient Quantity</th>
+
                                 </tr>
                             </thead>
+
                             @if (postInfo.Ingredient.Length != 0)
                             {
                                 <tbody class="table-light">
                                     @{
                                         var ingredients = postInfo.Ingredient.Split(',');
+
                                         var i = 1;
                                         
                                         foreach (var ingredient in ingredients)
                                         {
                                             <tr>
+
                                                 <th scope="row">@i</th>
+
                                                 @if (ingredient.Contains('-'))
                                                 {
                                                     <td>@ingredient.Split('-')[0]</td>
+
                                                     <td>@ingredient.Split('-')[1]</td>
                                                 }
                                                 else
                                                 {
                                                     <td>@ingredient</td>
+
                                                     <td>...</td>
                                                 }
                                             </tr>
+
                                             i++;
                                         }
                                     }
@@ -221,18 +262,26 @@
                             else
                             {
                                 <caption>No ingredients</caption>
+
                                 <tbody class="table">
+
                                     <tr>
+
                                         <th scope="row">...</th>
+
                                     </tr>
+
                                 </tbody>
                             }
+
                         </table>
                     </div>
 
                     <!-- Recipe -->
                     <h4 class="fw-normal mb-3">
+
                         <a class="link-dark" href="#recipe-body" id="recipe-body">Recipe</a>
+
                     </h4>
                     
                     <p class="mb-4"> @Html.Raw(postInfo.Recipe.Replace("\n", "<br />")) </p>

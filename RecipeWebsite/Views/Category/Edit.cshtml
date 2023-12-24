@@ -1,6 +1,6 @@
-﻿@using RecipeWebsite.ViewModels.GenereViewModel.PostCategoryViewModel
+﻿@using RecipeWebsite.ViewModels.GenereViewModel.CategoryViewModel
 
-@model EditPostCategoryViewModel
+@model EditCategoryViewModel
 
 <!-- Header -->
 <div class="py-5 text-center">
@@ -14,10 +14,10 @@
 
             <!-- CategoryName -->
             <div class="col-sm-12 mb-3">
-                <label asp-for="CategoryName" class="form-label">Post Category</label>
+                <label asp-for="CategoryName" class="form-label"> Recipe Category </label>
                 <input asp-for="CategoryName" type="text" class="form-control" id="title" placeholder="" value="@Model.CategoryName" required>
                 <div class="invalid-feedback">
-                    Post Category name is required.
+                    Category name is required.
                 </div>
             </div>
 

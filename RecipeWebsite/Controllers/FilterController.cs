@@ -29,7 +29,7 @@ namespace RecipeWebsite.Controllers
             }
             else if (!string.IsNullOrEmpty(postCategory))
             {
-                filteredPost = filteredPost.Where(p => p.PostCategory == postCategory);
+                //filteredPost = filteredPost.Where(p => p.Category == postCategory);
             }
 
             var filteredCategory = new CardsViewModel
