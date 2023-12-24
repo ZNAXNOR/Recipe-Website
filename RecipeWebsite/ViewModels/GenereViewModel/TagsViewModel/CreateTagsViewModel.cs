@@ -1,4 +1,4 @@
-﻿namespace RecipeWebsite.ViewModels.CategoryViewModel.TagsViewModel
+﻿namespace RecipeWebsite.ViewModels.GenereViewModel.TagsViewModel
 {
     public class CreateTagsViewModel
     {

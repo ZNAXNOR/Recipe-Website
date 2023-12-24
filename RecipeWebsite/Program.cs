@@ -6,7 +6,7 @@ using RecipeWebsite.Helpers;
 using RecipeWebsite.Interfaces;
 using RecipeWebsite.Repositories;
 using RecipeWebsite.Services;
-using RecipeWebsite.ViewModels.CategoryViewModel;
+using RecipeWebsite.ViewModels.GenereViewModel;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -72,7 +72,7 @@ using (var scope = app.Services.CreateScope())
         var _context = serviceProvider.GetRequiredService<ApplicationDbContext>();
         var _cache = serviceProvider.GetRequiredService<IMemoryCache>();
 
-        var categoryVM = new CategoryViewModel
+        var categoryVM = new GenereViewModel
         {
             PostCategories = _context.PostCategories.ToList()
         };

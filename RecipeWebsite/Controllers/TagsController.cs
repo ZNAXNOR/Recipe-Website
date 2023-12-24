@@ -2,10 +2,10 @@
 using RecipeWebsite.Data;
 using RecipeWebsite.Interfaces;
 using RecipeWebsite.Models;
-using RecipeWebsite.ViewModels.CategoryViewModel;
 using Microsoft.EntityFrameworkCore;
-using RecipeWebsite.ViewModels.CategoryViewModel.TagsViewModel;
+using RecipeWebsite.ViewModels.GenereViewModel.TagsViewModel;
 using RecipeWebsite.ViewModels.CardsViewModel;
+using RecipeWebsite.ViewModels.GenereViewModel;
 
 namespace RecipeWebsite.Controllers
 {
@@ -24,7 +24,7 @@ namespace RecipeWebsite.Controllers
         // Index
         public async Task<IActionResult> Index()
         {
-            var TagsVM = new CategoryViewModel
+            var TagsVM = new GenereViewModel
             {
                 RecipeTags = await _context.RecipeTags.ToListAsync()
             };

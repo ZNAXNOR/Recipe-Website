@@ -3,8 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using RecipeWebsite.Data;
 using RecipeWebsite.Interfaces;
 using RecipeWebsite.Models;
-using RecipeWebsite.ViewModels.CategoryViewModel;
-using RecipeWebsite.ViewModels.CategoryViewModel.PostCategoryViewModel;
+using RecipeWebsite.ViewModels.GenereViewModel;
+using RecipeWebsite.ViewModels.GenereViewModel.PostCategoryViewModel;
 
 namespace RecipeWebsite.Controllers
 {
@@ -22,7 +22,7 @@ namespace RecipeWebsite.Controllers
         // Index
         public async Task <IActionResult> Index()
         {
-            var PostCategoryVM = new CategoryViewModel
+            var PostCategoryVM = new GenereViewModel
             {
                 PostCategories = await _context.PostCategories.ToListAsync()
             };

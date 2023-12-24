@@ -1,13 +1,13 @@
 ﻿@using Microsoft.Extensions.Caching.Memory
 
-@using RecipeWebsite.ViewModels.CategoryViewModel
+@using RecipeWebsite.ViewModels.GenereViewModel
 
 @inject IMemoryCache Cache
 
 @{
-    if (!Cache.TryGetValue("CategoryList", out CategoryViewModel categoryVM))
+    if (!Cache.TryGetValue("CategoryList", out GenereViewModel categoryVM))
     {
-        categoryVM = new CategoryViewModel();
+        categoryVM = new GenereViewModel();
     }
 }
 

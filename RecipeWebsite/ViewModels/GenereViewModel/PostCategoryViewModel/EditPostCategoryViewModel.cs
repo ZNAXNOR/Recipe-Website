@@ -1,4 +1,4 @@
-﻿namespace RecipeWebsite.ViewModels.CategoryViewModel.PostCategoryViewModel
+﻿namespace RecipeWebsite.ViewModels.GenereViewModel.PostCategoryViewModel
 {
     public class EditPostCategoryViewModel
     {
