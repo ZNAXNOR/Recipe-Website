@@ -26,7 +26,7 @@ namespace RecipeWebsite.Models
 
 
         // Category
-        public string PostCategory { get; set; }
+        public int Category { get; set; }
 
 
         // Tags

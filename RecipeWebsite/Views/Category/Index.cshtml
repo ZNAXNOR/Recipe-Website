@@ -7,48 +7,74 @@
 
     <div class="container col-xxl-8 px-4 py-5 border-bottom mb-5">
         <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+
             <h1 class="display-6 fw-bold text-body-emphasis lh-1 mb-4"> Post Categories </h1>
+
             <p class="lead fst-italic"> All post categories are displayed here </p>
+
             <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                <a asp-controller="PostCategory" asp-action="Create" type="button" class="btn btn-success btn-lg px-4 me-md-2"><i class='bx bxs-edit-alt'></i> Create Post Category </a>
+
+                <a asp-controller="Category" asp-action="Create" type="button" class="btn btn-success btn-lg px-4 me-md-2"><i class='bx bxs-edit-alt'></i> Create Recipe Category </a>
+
             </div>
+
         </div>
     </div>
 
     <!-- Post Categories -->
     <h4 class="fw-normal mb-3">
+
         <a class="link-dark" href="#recipe-ingredients" id="recipe-ingredients">Post Categories</a>
+
     </h4>
+
     <div class="pb-3 mb-4 border-bottom">
         <table class="table caption-top">
+
             <thead class="table-dark">
                 <tr>
+
                     <th scope="col">Id</th>
+
                     <th scope="col">Category Name</th>
+
                     <th scope="col">Number of recipes</th>
+
                     <th scope="col"></th>
+
                     <th scope="col"></th>
+
                 </tr>
             </thead>
-            @if (Model.PostCategories.Count != 0)
+
+            @if (Model.RecipeCategories.Count != 0)
             {
-                <caption>Number of categories:<strong>  @Model.PostCategories.Count </strong></caption>
+                <caption>Number of categories:<strong>  @Model.RecipeCategories.Count </strong></caption>
+
                 <tbody class="table-light">
                     @{
                         var i = 1;
-                        foreach (var item in Model.PostCategories)
+
+                        foreach (var item in Model.RecipeCategories)
                         {
                             <tr>
+
                                 <td>@i</td>
+
                                 <td>@item.CategoryName Recipe</td>
+
                                 <td>  </td>
+
                                 <td>
-                                    <a class="btn btn-primary btn-sm px-4" asp-route-id="@item.Id" asp-controller="PostCategory" asp-action="Edit">Edit</a>
+                                    <a class="btn btn-primary btn-sm px-4" asp-route-id="@item.Id" asp-controller="Category" asp-action="Edit">Edit</a>
                                 </td>
+
                                 <td>
-                                    <a class="btn btn-danger btn-sm px-4" asp-route-id="@item.Id" asp-controller="PostCategory" asp-action="Delete">Delete</a>
+                                    <a class="btn btn-danger btn-sm px-4" asp-route-id="@item.Id" asp-controller="Category" asp-action="Delete">Delete</a>
                                 </td>
+
                             </tr>
+
                             i++;
                         }
                     }
@@ -56,11 +82,14 @@
             }
             else
             {
-                <caption>No post categories found.</caption>
+                <caption>No categories found.</caption>
+
                 <tbody class="table">
+
                     <tr>
                         <th scope="row">...</th>
                     </tr>
+
                 </tbody>
             }
         </table>

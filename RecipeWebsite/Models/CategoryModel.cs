@@ -2,7 +2,7 @@
 
 namespace RecipeWebsite.Models
 {
-    public class PostCategoryModel
+    public class CategoryModel
     {
         // Post
         [Key]

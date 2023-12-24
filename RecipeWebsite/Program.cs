@@ -27,7 +27,7 @@ services.AddScoped<IPostInterface, PostRepository>();
 services.AddScoped<ITagsInterface, TagsRepository>();
 
 // Post Category
-services.AddScoped<IPostCategoryInterface, PostCategoryRepository>();
+services.AddScoped<ICategoryInterface, CategoryRepository>();
 
 // Photo
 services.AddScoped<IPhotoInterface, PhotoService>();
@@ -70,11 +70,12 @@ using (var scope = app.Services.CreateScope())
     try
     {
         var _context = serviceProvider.GetRequiredService<ApplicationDbContext>();
+
         var _cache = serviceProvider.GetRequiredService<IMemoryCache>();
 
         var categoryVM = new GenereViewModel
         {
-            PostCategories = _context.PostCategories.ToList()
+            RecipeCategories = _context.RecipeCategories.ToList()
         };
 
         _cache.Set("CategoryList", categoryVM);
@@ -88,6 +89,7 @@ using (var scope = app.Services.CreateScope())
 #endregion
 
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();
@@ -96,6 +98,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}"
+    );
 
 app.Run();

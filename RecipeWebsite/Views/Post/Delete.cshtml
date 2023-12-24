@@ -2,48 +2,76 @@
 
 <!-- Header -->
 <div class="py-5 text-center">
+
     <h2>Delete Recipe form</h2>
+
     <p class="lead">Got a recipe you want to delete? Delete it here!</p>
+
 </div>
 
 <form method="post" asp-action="Delete" enctype="multipart/form-data">
 
     <div class="row g-5">
+
         <div class="p-4 p-md-5 border rounded-3 bg-body-tertiary">
 
             <!-- Title -->
             <h4 class="fw-normal mb-3">
+
                 <a class="link-dark">Recipe Title</a>
+
             </h4>
+
             <p class="h3 pb-3 mb-4 border-bottom">
+
                 @Html.Raw(Model.Title.Replace("\n", "<br />"))
+
             </p>
 
             <!-- Description -->
             <h4 class="fw-normal mb-3">
+
                 <a class="link-dark">Recipe Description</a>
+
             </h4>
+
             <p class="h6 text-body-secondary pb-3 mb-4 border-bottom">
+
                 @Html.Raw(Model.Description.Replace("\n", "<br />"))
+
             </p>
 
             <!-- Image -->
             <h4 class="fw-normal mb-3">
+
                 <a class="link-dark">Recipe Image</a>
+
             </h4>
+
             <div class="pb-3 mb-4 border-bottom">
+
                 <img class="img-fluid rounded" src="@Model.Image" alt="">
+
             </div>
 
             <!-- Youtube Link -->
             <div class="pb-3 mb-4 border-bottom">
+
                 <h4 class="fw-normal mb-3">
+
                     <a class="link-dark">Recipe Link</a>
+
                 </h4>
+
                 @if (Model.Link != null)
                 {
                     <h5 class="fst-italic" id="youtube-recipe-link">
-                        <p><a href="@Html.Raw(Model.Link.Replace("\n", "<br />"))" class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" target="_blank">Youtube Recipe Link</a> : @Model.Link</p>
+
+                        <p>
+                            <a href="@Html.Raw(Model.Link.Replace("\n", "<br />"))" class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" target="_blank">Youtube Recipe Link</a>
+                            : @Model.Link
+                        </p>
+
                     </h5>
                 }
                 else
@@ -55,24 +83,36 @@
             </div>
 
 
-            <!-- Collection Category -->
+            <!-- Recipe Category -->
             <div class="pb-3 mb-4 border-bottom">
+
                 <h4 class="fw-normal mb-3">
+
                     <a class="link-dark">Category</a>
+
                 </h4>
+
                 <p class="h6 text-body-secondary">
-                    @Model.PostCategory
+
+                    @Model.Category
+
                 </p>
+
             </div>
 
-            <!-- Collection Category -->
+            <!-- Recipe Tags -->
             <div class="pb-3 mb-4 border-bottom">
+
                 <h4 class="fw-normal mb-3">
+
                     <a class="link-dark">Recipe Tags</a>
+
                 </h4>
+
                 @if (Model.Tags != null)
                 {
                     var tags = Model.Tags.Split(','); 
+
                     foreach (var tag in tags)
                     {
                         <button href="#" type="button" class="btn btn-outline-secondary btn-sm mb-2">@tag</button>
@@ -86,38 +126,54 @@
 
             <!-- Ingredients -->
             <h4 class="fw-normal mb-3">
+
                 <a class="link-dark">Recipe Ingredients</a>
+
             </h4>
+
             <div class="pb-3 mb-4 border-bottom">
+
                 <table class="table">
+
                     <thead class="table-dark">
                         <tr>
+
                             <th scope="col">#</th>
+
                             <th scope="col">Ingredient Name</th>
+
                             <th scope="col">Ingredient Quantity</th>
+
                         </tr>
                     </thead>
+
                     @if (Model.Ingredient.Length != 0)
                     {
                         <tbody class="table-light">
                             @{
                                 var ingredients = Model.Ingredient.Split(',');
+
                                 var i = 1;
+
                                 foreach (var ingredient in ingredients)
                                 {
                                     <tr>
                                         <th scope="row">@i</th>
+
                                         @if (ingredient.Contains('-'))
                                         {
                                             <td>@ingredient.Split('-')[0]</td>
+
                                             <td>@ingredient.Split('-')[1]</td>
                                         }
                                         else
                                         {
                                             <td>@ingredient</td>
+
                                             <td>...</td>
                                         }
                                     </tr>
+
                                     i++;
                                 }
                             }
@@ -126,49 +182,76 @@
                     else
                     {
                         <caption>No ingredients</caption>
+
                         <tbody class="table">
+
                             <tr>
                                 <th scope="row">...</th>
                             </tr>
+
                         </tbody>
                     }
                 </table>
+
             </div>
 
             <!-- Recipe -->
             <h4 class="fw-normal mb-3">
+
                 <a class="link-dark">Recipe</a>
+
             </h4>
+
             <p class="pb-3 mb-4 border-bottom">
+
                 @Html.Raw(Model.Recipe.Replace("\n", "<br />"))
+
             </p>
 
             <!-- Delete -->
             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+
                 <button type="button" class="btn btn-danger btn-lg px-4 gap-3" data-bs-toggle="modal" data-bs-target="#recipeDeleteModal">Delete Recipe</button>
+
                 <a class="btn btn-secondary btn-lg px-4" asp-area="" asp-controller="Post" asp-action="Index">Cancel</a>
+
             </div>
 
             <!-- Delete Confirmation -->
             <div class="modal fade" id="recipeDeleteModal" tabindex="-1">
                 <div class="modal-dialog modal-lg modal-dialog-centered">
+
                     <div class="modal-content">
+
                         <!-- Model Header -->
                         <div class="modal-header bg-dark text-white">
+
                             <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm Recipe Delete?</h1>
+
                             <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
+
                         </div>
+
                         <!-- Model Body -->
                         <div class="modal-body">
+
                             <p class="fs-4">Are you sure you want to delete <strong>@Model.Title</strong> ?</p>
+
                             <p class="fst-italic"><small>This action<code> cannot be reverted</code>.</small></p>
+
                         </div>
+
                         <!-- Model Buttons -->
                         <div class="modal-footer">
+
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
                             <button type="submit" class="btn btn-danger">Confirm Delete</button>
+
                         </div>
+
                     </div>
+
                 </div>
             </div>
 

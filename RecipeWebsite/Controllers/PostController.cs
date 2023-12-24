@@ -84,7 +84,7 @@ namespace RecipeWebsite.Controllers
             // Category List
             var CreatePostCategoryVM = new CreatePostViewModel
             {
-                PostCategoryList = await _context.PostCategories.ToListAsync(),
+                CategoryList = await _context.RecipeCategories.ToListAsync(),
                 TagsList = await _context.RecipeTags.ToListAsync()
             };
 
@@ -110,7 +110,7 @@ namespace RecipeWebsite.Controllers
                     Image = result.Url.ToString(),
 
                     // Category
-                    PostCategory = postVM.PostCategory,
+                    Category = postVM.Category,
                     Tags = string.Join(',', postVM.Tags),
 
                     // Addition
@@ -204,7 +204,7 @@ namespace RecipeWebsite.Controllers
                 Recipe = post.Recipe,
 
                 // Category
-                PostCategory = post.PostCategory,
+                Category = post.Category,
                 //// Tags = string.Join(',', post.Tags), //// Do not open
 
                 // Addition
@@ -214,7 +214,7 @@ namespace RecipeWebsite.Controllers
                 Dislike = post.Dislike,
 
                 // Category List
-                PostCategoryList = await _context.PostCategories.ToListAsync(),
+                CategoryList = await _context.RecipeCategories.ToListAsync(),
                 TagsList = await _context.RecipeTags.ToListAsync()
             };
             return View(postVM);
@@ -222,8 +222,7 @@ namespace RecipeWebsite.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id,
-                                                EditPostViewModel postVM)
+        public async Task<IActionResult> Edit(int id, EditPostViewModel postVM)
         {
             if (!ModelState.IsValid)
             {
@@ -259,7 +258,7 @@ namespace RecipeWebsite.Controllers
                     Image = photoResult.Url.ToString(),
 
                     // Category
-                    PostCategory = postVM.PostCategory,
+                    Category = postVM.Category,
                     Tags = string.Join(',', postVM.Tags),
 
                     // Addition

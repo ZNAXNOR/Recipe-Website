@@ -4,16 +4,16 @@ using RecipeWebsite.Data;
 using RecipeWebsite.Interfaces;
 using RecipeWebsite.Models;
 using RecipeWebsite.ViewModels.GenereViewModel;
-using RecipeWebsite.ViewModels.GenereViewModel.PostCategoryViewModel;
+using RecipeWebsite.ViewModels.GenereViewModel.CategoryViewModel;
 
 namespace RecipeWebsite.Controllers
 {
-    public class PostCategoryController : Controller
+    public class CategoryController : Controller
     {
-        private readonly IPostCategoryInterface _postCategoryInterface;
+        private readonly ICategoryInterface _postCategoryInterface;
         private readonly ApplicationDbContext _context;
 
-        public PostCategoryController(IPostCategoryInterface postCategoryInterface, ApplicationDbContext context)
+        public CategoryController(ICategoryInterface postCategoryInterface, ApplicationDbContext context)
         {
             _postCategoryInterface = postCategoryInterface;
             _context = context;
@@ -24,7 +24,7 @@ namespace RecipeWebsite.Controllers
         {
             var PostCategoryVM = new GenereViewModel
             {
-                PostCategories = await _context.PostCategories.ToListAsync()
+                RecipeCategories = await _context.RecipeCategories.ToListAsync()
             };
 
             return View(PostCategoryVM);
@@ -37,11 +37,11 @@ namespace RecipeWebsite.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(CreatePostCategoryViewModel postCategoryVM)
+        public IActionResult Create(CreateCategoryViewModel postCategoryVM)
         {
             if (ModelState.IsValid)
             {
-                var postCategory = new PostCategoryModel
+                var postCategory = new CategoryModel
                 {
                     CategoryName = postCategoryVM.CategoryName
                 };
@@ -65,7 +65,7 @@ namespace RecipeWebsite.Controllers
 
             if (postCategory == null) return View("Error");
 
-            var postCategoryVM = new EditPostCategoryViewModel
+            var postCategoryVM = new EditCategoryViewModel
             {
                 CategoryName = postCategory.CategoryName
             };
@@ -74,7 +74,7 @@ namespace RecipeWebsite.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, EditPostCategoryViewModel postCategoryVM)
+        public async Task<IActionResult> Edit(int id, EditCategoryViewModel postCategoryVM)
         {
             if (!ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace RecipeWebsite.Controllers
 
             if (userPost != null)
             {
-                var postCategory = new PostCategoryModel
+                var postCategory = new CategoryModel
                 {
                     Id = id,
                     CategoryName = postCategoryVM.CategoryName
