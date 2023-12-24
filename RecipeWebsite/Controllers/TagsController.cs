@@ -5,6 +5,7 @@ using RecipeWebsite.Models;
 using RecipeWebsite.ViewModels.CategoryViewModel;
 using Microsoft.EntityFrameworkCore;
 using RecipeWebsite.ViewModels.CategoryViewModel.TagsViewModel;
+using RecipeWebsite.ViewModels.CardsViewModel;
 
 namespace RecipeWebsite.Controllers
 {
@@ -13,7 +14,8 @@ namespace RecipeWebsite.Controllers
         private readonly ITagsInterface _tagsInterface;
         private readonly ApplicationDbContext _context;
 
-        public TagsController(ITagsInterface tagsInterface, ApplicationDbContext context)
+        public TagsController( ITagsInterface tagsInterface,
+                                ApplicationDbContext context )
         {
             _tagsInterface = tagsInterface;
             _context = context;
@@ -46,8 +48,8 @@ namespace RecipeWebsite.Controllers
                     TagsName = tagsVM.TagsName,
                     TagsDescription = tagsVM.TagsDescription
                 };
-
                 _tagsInterface.Add(tags);
+
                 return RedirectToAction("Index");
             }
             else
@@ -56,6 +58,27 @@ namespace RecipeWebsite.Controllers
             }
 
             return View(tagsVM);
+        }
+
+
+        // Detail
+        [HttpGet]
+        public async Task<IActionResult> Detail(int id)
+        {
+            var taggedPosts = await (from p in _context.Posts select p).ToListAsync();
+
+            taggedPosts = taggedPosts.Where(p => p.Tags.Split(',')
+                                                        .Select(p => Convert.ToInt32(p))
+                                                        .Contains(id)).ToList();
+
+            var CardPostVM = new CardsViewModel
+            {
+                TagInfo = await _tagsInterface.GetByIdAsync(id),
+                PostCard = taggedPosts,
+                Tags = await _context.RecipeTags.ToListAsync()
+            };
+
+            return View(CardPostVM);
         }
 
 
@@ -76,7 +99,8 @@ namespace RecipeWebsite.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, EditTagsViewModel tagsVM)
+        public async Task<IActionResult> Edit(int id,
+                                                EditTagsViewModel tagsVM)
         {
             if (!ModelState.IsValid)
             {
@@ -117,7 +141,30 @@ namespace RecipeWebsite.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
-        public async Task<IActionResult> DeleteCollection(int id)
+        public async Task<IActionResult> DeleteTag(int id)
+        {
+            var tagsDetails = await _tagsInterface.GetByIdAsync(id);
+
+            if (tagsDetails == null) return View("Error");
+
+            _tagsInterface.Delete(tagsDetails);
+
+            return RedirectToAction("Index");
+        }
+
+
+        // Delete From Tag
+        public async Task<IActionResult> DeleteFromTag(int id)
+        {
+            var tagsDetails = await _tagsInterface.GetByIdAsync(id);
+
+            if (tagsDetails == null) return View("Error");
+
+            return View(tagsDetails);
+        }
+
+        [HttpPost, ActionName("DeleteFromTag")]
+        public async Task<IActionResult> DeleteFromTagDetails(int id)
         {
             var tagsDetails = await _tagsInterface.GetByIdAsync(id);
 

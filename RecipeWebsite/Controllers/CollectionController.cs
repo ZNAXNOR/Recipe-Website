@@ -48,8 +48,10 @@ namespace RecipeWebsite.Controllers
         public async Task<IActionResult> Detail(int id)
         {
             CollectionModel collection = await _collectionInterface.GetByIdAsync(id);
+
             return View(collection);
         }
+
 
         // Create
         public IActionResult Create()
@@ -68,12 +70,10 @@ namespace RecipeWebsite.Controllers
                 {
                     Title = collectionVM.Title,
                     Description = collectionVM.Description,
-                    Image = result.Url.ToString(),
-
-                    // Category
-                    //Tags = collectionVM.Tags
+                    Image = result.Url.ToString()
                 };
                 _collectionInterface.Add(collection);
+
                 return RedirectToAction("Index");
             }
             else
@@ -88,25 +88,29 @@ namespace RecipeWebsite.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var collection = await _collectionInterface.GetByIdAsync(id);
-            if (collection == null) return View("Error");
+            if (collection == null)
+            {
+                return View("Error");
+            }
+
             var collectionVM = new EditCollectionViewModel
             {
                 Title = collection.Title,
                 Description = collection.Description,
-                URL = collection.Image,
-
-                // Category
-                //Tags = collection.Tags
+                URL = collection.Image
             };
+
             return View(collectionVM);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, EditCollectionViewModel collectionVM)
+        public async Task<IActionResult> Edit(int id,
+                                                EditCollectionViewModel collectionVM)
         {
             if (!ModelState.IsValid)
             {
                 ModelState.AddModelError("", "Failed to edit collection");
+
                 return View("Edit", collectionVM);
             }
 
@@ -121,8 +125,10 @@ namespace RecipeWebsite.Controllers
                 catch (Exception ex)
                 {
                     ModelState.AddModelError("", "Could not delete photo");
+
                     return View(collectionVM);
                 }
+
                 var photoResult = await _photoInterface.AddPhotoAsync(collectionVM.Image);
 
                 var collection = new CollectionModel
@@ -130,12 +136,8 @@ namespace RecipeWebsite.Controllers
                     Id = id,
                     Title = collectionVM.Title,
                     Description = collectionVM.Description,
-                    Image = photoResult.Url.ToString(),
-
-                    // Category
-                    //Tags = collectionVM.Tags
+                    Image = photoResult.Url.ToString()
                 };
-
                 _collectionInterface.Update(collection);
 
                 return RedirectToAction("Index");
@@ -151,7 +153,12 @@ namespace RecipeWebsite.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var collectionDetails = await _collectionInterface.GetByIdAsync(id);
-            if (collectionDetails == null) return View("Error");
+
+            if (collectionDetails == null)
+            {
+                return View("Error");
+            }
+
             return View(collectionDetails);
         }
 
@@ -159,9 +166,14 @@ namespace RecipeWebsite.Controllers
         public async Task<IActionResult> DeleteCollection(int id)
         {
             var collectionDetails = await _collectionInterface.GetByIdAsync(id);
-            if (collectionDetails == null) return View("Error");
+
+            if (collectionDetails == null)
+            {
+                return View("Error");
+            }
 
             _collectionInterface.Delete(collectionDetails);
+
             return RedirectToAction("Index");
         }
     }

@@ -25,6 +25,12 @@ namespace RecipeWebsite.Repositories
             return Save();
         }
 
+        public bool DeleteFromTag(TagsModel tags)
+        {
+            _context.Remove(tags);
+            return Save();
+        }
+
         public async Task<IEnumerable<TagsModel>> GetAll()
         {
             return await _context.RecipeTags.ToListAsync();

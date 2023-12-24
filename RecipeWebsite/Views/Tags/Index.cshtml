@@ -40,13 +40,17 @@
                         {
                             <tr>
                                 <td>@i</td>
-                                <td>@item.TagsName Recipe</td>
+                                <td>
+                                    <p>
+                                        <a asp-controller="Tags" asp-action="Detail" asp-route-id="@item.Id" class="link-opacity-100">@item.TagsName Recipe</a>
+                                    </p>
+                                </td>
                                 <td>  </td>
                                 <td>
-                                    <a class="btn btn-primary btn-sm px-4" asp-route-id="@item.Id" asp-controller="Tags" asp-action="Edit">Edit</a>
+                                    <a asp-controller="Tags" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm px-4">Edit</a>
                                 </td>
                                 <td>
-                                    <a class="btn btn-danger btn-sm px-4" asp-route-id="@item.Id" asp-controller="Tags" asp-action="Delete">Delete</a>
+                                    <a asp-controller="Tags" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm px-4">Delete</a>
                                 </td>
                             </tr>
                             i++;

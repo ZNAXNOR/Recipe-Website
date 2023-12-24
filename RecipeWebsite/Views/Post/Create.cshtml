@@ -77,7 +77,7 @@
                             @foreach (var item in Model.TagsList)
                             {
                                 <label asp-for="Tags" for="@item.TagsName">
-                                    <input type="checkbox" name="Tags" id="@item.TagsName" onchange="checkboxStatusChange()" value="@item.TagsName">
+                                    <input type="checkbox" name="Tags" id="@item.TagsName" onchange="checkboxStatusChange()" value="@item.Id">
                                     @item.TagsName
                                 </label>
                             }

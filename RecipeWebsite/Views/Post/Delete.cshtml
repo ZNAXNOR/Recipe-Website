@@ -72,7 +72,7 @@
                 </h4>
                 @if (Model.Tags != null)
                 {
-                    var tags = Model.Tags.Split(',');
+                    var tags = Model.Tags.Split(','); 
                     foreach (var tag in tags)
                     {
                         <button href="#" type="button" class="btn btn-outline-secondary btn-sm mb-2">@tag</button>

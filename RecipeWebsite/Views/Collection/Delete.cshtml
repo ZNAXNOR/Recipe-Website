@@ -49,6 +49,29 @@
                     <a class="btn btn-secondary btn-lg px-4" asp-area="" asp-controller="Collection" asp-action="Index">Cancel</a>
                 </div>
 
+                <!-- Delete Confirmation -->
+                <div class="modal fade" id="recipeDeleteModal" tabindex="-1">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="modal-content">
+                            <!-- Model Header -->
+                            <div class="modal-header bg-dark text-white">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm Recipe Delete?</h1>
+                                <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <!-- Model Body -->
+                            <div class="modal-body">
+                                <p class="fs-4">Are you sure you want to delete <strong>@Model.Title</strong> ?</p>
+                                <p class="fst-italic"><small>This action<code> cannot be reverted</code>.</small></p>
+                            </div>
+                            <!-- Model Buttons -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-danger">Confirm Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </form>
 

@@ -16,11 +16,6 @@ namespace RecipeWebsite.Models
         public string Image { get; set; }
 
 
-        // Category
-        public string PostCategory { get; set; }
-        public string? Tags { get; set; }
-
-
         // Addition
         [Display(Name = "Upload Date")]
         [DataType(DataType.Date)]
@@ -28,6 +23,14 @@ namespace RecipeWebsite.Models
         public int View { get; set; }
         public int Like { get; set; }
         public int Dislike { get; set; }
+
+
+        // Category
+        public string PostCategory { get; set; }
+
+
+        // Tags
+        public string? Tags { get; set; }
 
 
         // App User

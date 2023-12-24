@@ -21,7 +21,6 @@ namespace RecipeWebsite.Controllers
         {
             ViewBag.PostCategory = postCategory;
 
-
             var filteredPost = from p in _context.Posts select p;
 
             if (postCategory == "All")

@@ -10,6 +10,7 @@ namespace RecipeWebsite.Interfaces
         bool Add(TagsModel tags);
         bool Update(TagsModel tags);
         bool Delete(TagsModel tags);
+        bool DeleteFromTag(TagsModel tags);
         bool Save();
     }
 }

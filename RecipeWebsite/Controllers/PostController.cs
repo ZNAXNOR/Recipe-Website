@@ -12,16 +12,22 @@ namespace RecipeWebsite.Controllers
     public class PostController : Controller
     {
         private readonly IPostInterface _postInterface;
+        private readonly ITagsInterface _tagsInterface;
         private readonly IPhotoInterface _photoInterface;
         private readonly ApplicationDbContext _context;
         private readonly IMemoryCache _cache;
 
-        public PostController(IPostInterface postInterface, IPhotoInterface photoInterface, ApplicationDbContext context, IMemoryCache cache)
+        public PostController(IPostInterface postInterface,
+                                IPhotoInterface photoInterface,
+                                ApplicationDbContext context,
+                                IMemoryCache cache,
+                                ITagsInterface tagsInterface)
         {
             _postInterface = postInterface;
             _photoInterface = photoInterface;
             _context = context;
             _cache = cache;
+            _tagsInterface = tagsInterface;
         }
 
 
@@ -41,7 +47,8 @@ namespace RecipeWebsite.Controllers
             // All Posts
             var CardPostVM = new CardsViewModel
             {
-                PostCard = await _context.Posts.ToListAsync()
+                PostCard = await _context.Posts.ToListAsync(),
+                Tags = await _context.RecipeTags.ToListAsync()
             };
 
             return View(CardPostVM);
@@ -128,11 +135,15 @@ namespace RecipeWebsite.Controllers
         [HttpGet]
         public async Task<IActionResult> Detail(int id)
         {
-            PostModel post = await _postInterface.GetByIdAsync(id);
+            var post = new DetailPostViewModel
+            {
+                Posts = await _postInterface.GetByIdAsync(id),
+                Tags = await _context.RecipeTags.ToListAsync()
+            };
 
-            post.View = post.View + 1;
+            post.Posts.View++;
 
-            _context.Update(post);
+            _context.Update(post.Posts);
             await _context.SaveChangesAsync();
 
             return View(post);
@@ -194,7 +205,7 @@ namespace RecipeWebsite.Controllers
 
                 // Category
                 PostCategory = post.PostCategory,
-                //Tags = string.Join(',', post.Tags),
+                //// Tags = string.Join(',', post.Tags), //// Do not open
 
                 // Addition
                 Date = post.Date,
@@ -211,7 +222,8 @@ namespace RecipeWebsite.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, EditPostViewModel postVM)
+        public async Task<IActionResult> Edit(int id,
+                                                EditPostViewModel postVM)
         {
             if (!ModelState.IsValid)
             {
