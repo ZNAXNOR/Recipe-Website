@@ -34,7 +34,9 @@ namespace RecipeWebsite.Controllers
 
             var filteredCategory = new CardsViewModel
             {
-                PostCard = await filteredPost.ToListAsync()
+                PostCard = await filteredPost.ToListAsync(),
+                Categories = await _context.RecipeCategories.ToListAsync(),
+                Tags = await _context.RecipeTags.ToListAsync()
             };
 
             _cache.Set("filteredCategory", filteredCategory);

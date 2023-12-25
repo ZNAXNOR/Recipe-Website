@@ -69,14 +69,15 @@ namespace RecipeWebsite.Controllers
 
             postCategory = postCategory.Where(p => p.Category == id);
 
-            var CardPostVM = new CardsViewModel
+            var PostCategoryVM = new CardsViewModel
             {
                 CategoryInfo = await _categoryInterface.GetByIdAsync(id),
                 PostCard = await postCategory.ToListAsync(),
-                Categories = await _context.RecipeCategories.ToListAsync()
+                Categories = await _context.RecipeCategories.ToListAsync(),
+                Tags = await _context.RecipeTags.ToListAsync()
             };
 
-            return View(CardPostVM);
+            return View(PostCategoryVM);
         }
 
 

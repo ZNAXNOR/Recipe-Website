@@ -71,7 +71,7 @@ namespace RecipeWebsite.Controllers
                                                         .Select(p => Convert.ToInt32(p))
                                                         .Contains(id)).ToList();
 
-            var CardPostVM = new CardsViewModel
+            var TaggedPostVM = new CardsViewModel
             {
                 TagInfo = await _tagsInterface.GetByIdAsync(id),
 
@@ -81,7 +81,7 @@ namespace RecipeWebsite.Controllers
                 Tags = await _context.RecipeTags.ToListAsync()
             };
 
-            return View(CardPostVM);
+            return View(TaggedPostVM);
         }
 
 

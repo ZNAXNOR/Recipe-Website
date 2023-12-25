@@ -41,7 +41,7 @@
                                 <option>All</option>
                                 @foreach (var item in categoryVM.RecipeCategories)
                                 {
-                                    <option>@item.CategoryName</option>
+                                    <option value="@item.Id">@item.CategoryName</option>
                                 }
                             </select>
                             <button class="btn btn-outline-success shadow-none me-2" type="submit"><i class='bx bx-filter'></i></button>
