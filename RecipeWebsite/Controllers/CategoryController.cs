@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using RecipeWebsite.Data;
 using RecipeWebsite.Interfaces;
 using RecipeWebsite.Models;
+using RecipeWebsite.ViewModels.CardsViewModel;
 using RecipeWebsite.ViewModels.GenereViewModel;
 using RecipeWebsite.ViewModels.GenereViewModel.CategoryViewModel;
 
@@ -10,14 +11,15 @@ namespace RecipeWebsite.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ICategoryInterface _postCategoryInterface;
+        private readonly ICategoryInterface _categoryInterface;
         private readonly ApplicationDbContext _context;
 
-        public CategoryController(ICategoryInterface postCategoryInterface, ApplicationDbContext context)
+        public CategoryController(ICategoryInterface categoryInterface, ApplicationDbContext context)
         {
-            _postCategoryInterface = postCategoryInterface;
+            _categoryInterface = categoryInterface;
             _context = context;
         }
+
 
         // Index
         public async Task <IActionResult> Index()
@@ -29,6 +31,7 @@ namespace RecipeWebsite.Controllers
 
             return View(PostCategoryVM);
         }
+
 
         // Create
         public IActionResult Create()
@@ -46,7 +49,7 @@ namespace RecipeWebsite.Controllers
                     CategoryName = postCategoryVM.CategoryName
                 };
 
-                _postCategoryInterface.Add(postCategory);
+                _categoryInterface.Add(postCategory);
                 return RedirectToAction("Index");
             }
             else
@@ -58,47 +61,66 @@ namespace RecipeWebsite.Controllers
         }
 
 
+        // Detail
+        [HttpGet]
+        public async Task<IActionResult> Detail(int id)
+        {
+            var postCategory = from p in _context.Posts select p;
+
+            postCategory = postCategory.Where(p => p.Category == id);
+
+            var CardPostVM = new CardsViewModel
+            {
+                CategoryInfo = await _categoryInterface.GetByIdAsync(id),
+                PostCard = await postCategory.ToListAsync(),
+                Categories = await _context.RecipeCategories.ToListAsync()
+            };
+
+            return View(CardPostVM);
+        }
+
+
         // Edit
         public async Task<IActionResult> Edit(int id)
         {
-            var postCategory = await _postCategoryInterface.GetByIdAsync(id);
+            var category = await _categoryInterface.GetByIdAsync(id);
 
-            if (postCategory == null) return View("Error");
+            if (category == null) return View("Error");
 
-            var postCategoryVM = new EditCategoryViewModel
+            var categoryVM = new EditCategoryViewModel
             {
-                CategoryName = postCategory.CategoryName
+                CategoryName = category.CategoryName
             };
 
-            return View(postCategoryVM);
+            return View(categoryVM);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, EditCategoryViewModel postCategoryVM)
+        public async Task<IActionResult> Edit(int id, EditCategoryViewModel categoryVM)
         {
             if (!ModelState.IsValid)
             {
                 ModelState.AddModelError("", "Failed to edit post category");
-                return View("Edit", postCategoryVM);
+                return View("Edit", categoryVM);
             }
 
-            var userPost = await _postCategoryInterface.GetByIdAsyncNoTracking(id);
+            var userPost = await _categoryInterface.GetByIdAsyncNoTracking(id);
 
             if (userPost != null)
             {
-                var postCategory = new CategoryModel
+                var category = new CategoryModel
                 {
                     Id = id,
-                    CategoryName = postCategoryVM.CategoryName
+                    CategoryName = categoryVM.CategoryName
                 };
 
-                _postCategoryInterface.Update(postCategory);
+                _categoryInterface.Update(category);
 
                 return RedirectToAction("Index");
             }
             else
             {
-                return View(postCategoryVM);
+                return View(categoryVM);
             }
         }
 
@@ -106,21 +128,44 @@ namespace RecipeWebsite.Controllers
         // Delete
         public async Task<IActionResult> Delete(int id)
         {
-            var postCategoryDetails = await _postCategoryInterface.GetByIdAsync(id);
+            var categoryDetails = await _categoryInterface.GetByIdAsync(id);
 
-            if (postCategoryDetails == null) return View("Error");
+            if (categoryDetails == null) return View("Error");
 
-            return View(postCategoryDetails);
+            return View(categoryDetails);
         }
 
         [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeletePost(int id)
         {
-            var postCategoryDetails = await _postCategoryInterface.GetByIdAsync(id);
+            var categoryDetails = await _categoryInterface.GetByIdAsync(id);
 
-            if (postCategoryDetails == null) return View("Error");
+            if (categoryDetails == null) return View("Error");
 
-            _postCategoryInterface.Delete(postCategoryDetails);
+            _categoryInterface.Delete(categoryDetails);
+
+            return RedirectToAction("Index");
+        }
+
+
+        // Delete From Category
+        public async Task<IActionResult> DeleteFromCategory(int id)
+        {
+            var categoryDetails = await _categoryInterface.GetByIdAsync(id);
+
+            if (categoryDetails == null) return View("Error");
+
+            return View(categoryDetails);
+        }
+
+        [HttpPost, ActionName("DeleteFromCategory")]
+        public async Task<IActionResult> DeleteFromCategoryDetails(int id)
+        {
+            var categoryDetails = await _categoryInterface.GetByIdAsync(id);
+
+            if (categoryDetails == null) return View("Error");
+
+            _categoryInterface.Delete(categoryDetails);
 
             return RedirectToAction("Index");
         }

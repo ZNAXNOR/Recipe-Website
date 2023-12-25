@@ -1,4 +1,4 @@
-﻿@model TagsModel
+﻿@model CategoryModel
 
 
 <!-- Header -->
@@ -17,24 +17,24 @@
             <!-- Tags Name -->
             <h4 class="fw-normal mb-3">
 
-                <a class="link-dark">Tags Name</a>
+                <a class="link-dark">Category Name</a>
 
             </h4>
 
             <p class="h3 pb-3 mb-4 border-bottom">
-                @Model.TagsName
+                @Model.CategoryName
             </p>
 
 
             <!-- Tags Description -->
             <h4 class="fw-normal mb-3">
 
-                <a class="link-dark">Tags Description</a>
+                <a class="link-dark">Category Description</a>
 
             </h4>
 
             <p class="h3 pb-3 mb-4 border-bottom">
-                @Model.TagsDescription
+                @Model.CategoryDescription
             </p>
 
 
@@ -43,7 +43,7 @@
 
                 <button type="button" class="btn btn-danger btn-lg px-4 gap-3" data-bs-toggle="modal" data-bs-target="#recipeDeleteModal">Delete Recipe</button>
 
-                <a class="btn btn-secondary btn-lg px-4" asp-controller="Tags" asp-action="Detail" asp-route-id="@Model.Id" >Cancel</a>
+                <a class="btn btn-secondary btn-lg px-4" asp-controller="Category" asp-action="Detail" asp-route-id="@Model.Id" >Cancel</a>
 
             </div>
 
@@ -57,7 +57,7 @@
                         <!-- Model Header -->
                         <div class="modal-header bg-dark text-white">
 
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm Tag Delete?</h1>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm Category Delete?</h1>
 
                             <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
 
@@ -67,7 +67,7 @@
                         <!-- Model Body -->
                         <div class="modal-body">
 
-                            <p class="fs-4">Are you sure you want to delete <strong>@Model.TagsName</strong> ?</p>
+                            <p class="fs-4">Are you sure you want to delete <strong>@Model.CategoryName</strong> ?</p>
 
                             <p class="fst-italic"><small>This action<code> cannot be reverted</code>.</small></p>
 

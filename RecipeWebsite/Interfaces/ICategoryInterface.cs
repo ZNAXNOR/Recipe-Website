@@ -10,6 +10,7 @@ namespace RecipeWebsite.Interfaces
         bool Add(CategoryModel category);
         bool Update(CategoryModel category);
         bool Delete(CategoryModel category);
+        bool DeleteFromCategory(CategoryModel category);
         bool Save();
     }
 }

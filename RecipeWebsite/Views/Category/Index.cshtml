@@ -61,7 +61,11 @@
 
                                 <td>@i</td>
 
-                                <td>@item.CategoryName Recipe</td>
+                                <td>
+                                    <p>
+                                        <a asp-controller="Category" asp-action="Detail" asp-route-id="@item.Id" class="link-opacity-100">@item.CategoryName Recipe</a>
+                                    </p>
+                                </td>
 
                                 <td>  </td>
 

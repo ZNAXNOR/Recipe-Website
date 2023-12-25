@@ -52,7 +52,7 @@
                 <div class="form-check-inline">
                     @foreach (var item in Model.CategoryList)
                     {
-                        <input type="radio" asp-for="Category" class="btn-check" id="@item.CategoryName" value="@item.CategoryName" required>
+                        <input type="radio" asp-for="Category" class="btn-check" id="@item.CategoryName" value="@item.Id" required>
                         <label asp-for="Category" class="btn btn-outline-primary" for="@item.CategoryName">@item.CategoryName</label>
                     }
                 </div>
@@ -61,7 +61,7 @@
                 </div>
             </div>
 
-            <!-- Collection Category -->
+            <!-- Recipe Tags -->
             <div class="form-group col-md-12 mb-3">
                 <label asp-for="Tags" for="myMultiselect">Collection Category</label>
                 @if (Model.TagsList.Count != 0)

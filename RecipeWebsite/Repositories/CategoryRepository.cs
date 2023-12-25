@@ -25,6 +25,12 @@ namespace RecipeWebsite.Repositories
             return Save();
         }
 
+        public bool DeleteFromCategory(CategoryModel category)
+        {
+            _context.Remove(category);
+            return Save();
+        }
+
         public async Task<IEnumerable<CategoryModel>> GetAll()
         {
             return await _context.RecipeCategories.ToListAsync();

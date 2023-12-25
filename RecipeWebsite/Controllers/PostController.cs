@@ -12,7 +12,6 @@ namespace RecipeWebsite.Controllers
     public class PostController : Controller
     {
         private readonly IPostInterface _postInterface;
-        private readonly ITagsInterface _tagsInterface;
         private readonly IPhotoInterface _photoInterface;
         private readonly ApplicationDbContext _context;
         private readonly IMemoryCache _cache;
@@ -20,14 +19,12 @@ namespace RecipeWebsite.Controllers
         public PostController(IPostInterface postInterface,
                                 IPhotoInterface photoInterface,
                                 ApplicationDbContext context,
-                                IMemoryCache cache,
-                                ITagsInterface tagsInterface)
+                                IMemoryCache cache)
         {
             _postInterface = postInterface;
             _photoInterface = photoInterface;
             _context = context;
             _cache = cache;
-            _tagsInterface = tagsInterface;
         }
 
 
@@ -48,6 +45,7 @@ namespace RecipeWebsite.Controllers
             var CardPostVM = new CardsViewModel
             {
                 PostCard = await _context.Posts.ToListAsync(),
+                Categories = await _context.RecipeCategories.ToListAsync(),
                 Tags = await _context.RecipeTags.ToListAsync()
             };
 
@@ -138,6 +136,7 @@ namespace RecipeWebsite.Controllers
             var post = new DetailPostViewModel
             {
                 Posts = await _postInterface.GetByIdAsync(id),
+                Categories = await _context.RecipeCategories.ToListAsync(),
                 Tags = await _context.RecipeTags.ToListAsync()
             };
 

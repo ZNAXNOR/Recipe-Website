@@ -6,6 +6,8 @@
 @{
     var postInfo = Model.Posts;
 
+    var postCategory = Model.Categories;
+
     var postTags = Model.Tags;
 }
 
@@ -36,7 +38,15 @@
                         </p>
 
                         <!-- Recipe Category -->
-                        <p class="h5 fw-bold pt-1">Recipe Category: @postInfo.Category </p>
+                        @{
+                            var categoryId = postCategory.FirstOrDefault(p => p.Id == postInfo.Category);
+
+                            var categoryName = categoryId?.CategoryName;
+                        }
+                        <p class="h5 fw-bold pt-1">Recipe Category:
+                            <a asp-controller="Category" asp-action="Detail" asp-route-id="@postInfo.Category" 
+                            class="link-body-emphasis" style="background-color: transparent"> @categoryName </a>
+                        </p>
                     
                     </div>
 

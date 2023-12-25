@@ -14,8 +14,8 @@ namespace RecipeWebsite.Controllers
         private readonly ITagsInterface _tagsInterface;
         private readonly ApplicationDbContext _context;
 
-        public TagsController( ITagsInterface tagsInterface,
-                                ApplicationDbContext context )
+        public TagsController(ITagsInterface tagsInterface,
+                                ApplicationDbContext context)
         {
             _tagsInterface = tagsInterface;
             _context = context;
@@ -74,7 +74,10 @@ namespace RecipeWebsite.Controllers
             var CardPostVM = new CardsViewModel
             {
                 TagInfo = await _tagsInterface.GetByIdAsync(id),
+
                 PostCard = taggedPosts,
+
+                Categories = await _context.RecipeCategories.ToListAsync(),
                 Tags = await _context.RecipeTags.ToListAsync()
             };
 

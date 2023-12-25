@@ -53,7 +53,7 @@
                 <div class="form-check-inline">
                     @foreach (var item in Model.CategoryList)
                     {
-                        <input type="radio" asp-for="Category" class="btn-check" id="@item.CategoryName" value="@item.CategoryName" required>
+                        <input type="radio" asp-for="Category" class="btn-check" id="@item.CategoryName" value="@item.Id" required>
                         <label asp-for="Category" class="btn btn-outline-primary" for="@item.CategoryName">@item.CategoryName</label>
                     }
                 </div>

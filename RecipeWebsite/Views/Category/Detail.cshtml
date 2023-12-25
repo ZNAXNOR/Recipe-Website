@@ -1,0 +1,58 @@
+﻿@using RecipeWebsite.ViewModels.CardsViewModel
+
+@model CardsViewModel
+
+<!-- Page Content -->
+@{
+    var categoryInfo = Model.CategoryInfo; 
+}
+
+<main>
+    <div class="d-flex mt-lg-5">
+        <div class="d-flex">
+
+            <h1 class="flex-item fs-1 mb-0">
+
+                @categoryInfo.CategoryName
+
+            </h1>
+
+        </div>
+    </div>
+
+    <div class="mb-2 py-3 border-bottom mb-5">
+        
+        <p>
+            @categoryInfo.CategoryDescription
+        </p>
+
+        <a asp-controller="Category" asp-action="Edit" asp-route-id="@categoryInfo.Id" type="button" class="btn btn-sm btn-primary shadow-none me-2"><i class='bx bxs-edit-alt'></i> Edit category </a>
+
+        <a asp-controller="Category" asp-action="DeleteFromTag" asp-route-id="@categoryInfo.Id" type="button" class="btn btn-sm btn-outline-danger shadow-none me-2"><i class='bx bxs-trash-alt me-2'></i>Delete</a>
+            
+    
+    </div>
+
+    <!-- Cards -->
+    @if (Model.PostCard.Count != 0)
+    {
+        <div class="album py-5 bg-light">
+            <div class="container">
+
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+                    <partial name="~/Views/Shared/Cards/_PostCards.cshtml" />
+
+                </div>
+
+            </div>
+        </div>
+    }
+    else // Error
+    {
+        <p class="text-secondary h3 pt-lg-5"> No post results found. </p>
+        <br />
+        <p class="blockquote-footer pb-lg-5"> No posts found. A problem seems to have occured! Please wait patiently.</p>
+    }
+
+ </main>
