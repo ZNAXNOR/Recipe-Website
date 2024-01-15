@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using SimpleWebsite.Models;
 
 namespace RecipeWebsite.Models
 {
@@ -20,9 +21,9 @@ namespace RecipeWebsite.Models
         [Display(Name = "Upload Date")]
         [DataType(DataType.Date)]
         public DateTime Date { get; set; }
-        public int View { get; set; }
-        public int Like { get; set; }
-        public int Dislike { get; set; }
+        public int TotalViews { get; set; }
+        public int TotalLikes { get; set; }
+        public int TotalDislikes { get; set; }
 
 
         // Category
@@ -30,7 +31,9 @@ namespace RecipeWebsite.Models
 
 
         // Tags
-        public string? Tags { get; set; }
+        public List<TagsModel> Tags { get; set; } = new List<TagsModel>();
+        // Many To Many
+        public virtual List<PostTagModel> PostTags { get; set; } = new List<PostTagModel>();
 
 
         // App User

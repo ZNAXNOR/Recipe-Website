@@ -30,7 +30,7 @@
                 </div>
 
                 <!-- Tags -->
-                @if (item.Tags != null)
+                @* @if (item.Tags != null)
                 {
                     var tags = item.Tags.Split(',');
 
@@ -51,14 +51,14 @@
                 else
                 {
                     <p class="small text-secondary"> No tags available </p>
-                }
+                } *@
             
             </div>
 
             <!--Views-->
             <div class="card-footer">
 
-                <p class="small text-secondary mb-1"><i class="bi bi-eye-fill me-2"></i>@item.View views</p>
+                <p class="small text-secondary mb-1"><i class="bi bi-eye-fill me-2"></i>@item.TotalViews views</p>
 
             </div>
 

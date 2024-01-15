@@ -125,20 +125,20 @@
                             <!-- Recipe Tags -->
                             @if (postInfo.Tags != null)
                             {
-                                var tags = postInfo.Tags.Split(',');
+                                // var tags = postInfo.Tags.Split(',');
                                 
-                                foreach (var tag in tags)
-                                {
-                                    var tagId = postTags?.FirstOrDefault(p => p.Id == int.Parse(tag));
+                                // foreach (var tag in tags)
+                                // {
+                                //     var tagId = postTags?.FirstOrDefault(p => p.Id == int.Parse(tag));
 
-                                    var tagName = tagId?.TagsName;
+                                //     var tagName = tagId?.TagsName;
 
-                                    @if (tagName != null)
-                                    {
-                                        <a asp-controller="Tags" asp-action="Detail" asp-route-id="@tag" type="button" class="btn btn-outline-dark shadow-none btn-sm mb-2">@tagName</a>
-                                    }
+                                //     @if (tagName != null)
+                                //     {
+                                //         <a asp-controller="Tags" asp-action="Detail" asp-route-id="@tag" type="button" class="btn btn-outline-dark shadow-none btn-sm mb-2">@tagName</a>
+                                //     }
                                     
-                                }
+                                // }
                             }
                             else
                             {
@@ -162,11 +162,11 @@
                             @{
                                 var upload_date = @postInfo.Date.ToString("dd/MM/yyyy");
 
-                                var views = postInfo.View;
+                                var views = postInfo.TotalViews;
 
-                                var likes = postInfo.Like;
+                                var likes = postInfo.TotalLikes;
 
-                                var dislikes = postInfo.Dislike;
+                                var dislikes = postInfo.TotalDislikes;
 
                                 var votes = likes + dislikes;
                             }

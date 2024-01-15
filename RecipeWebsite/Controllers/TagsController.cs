@@ -67,9 +67,9 @@ namespace RecipeWebsite.Controllers
         {
             var taggedPosts = await (from p in _context.Posts select p).ToListAsync();
 
-            taggedPosts = taggedPosts.Where(p => p.Tags.Split(',')
-                                                        .Select(p => Convert.ToInt32(p))
-                                                        .Contains(id)).ToList();
+            //taggedPosts = taggedPosts.Where(p => p.Tags.Split(',')
+            //                                            .Select(p => Convert.ToInt32(p))
+            //                                            .Contains(id)).ToList();
 
             var TaggedPostVM = new CardsViewModel
             {

@@ -109,13 +109,13 @@ namespace RecipeWebsite.Controllers
 
                     // Category
                     Category = postVM.Category,
-                    Tags = string.Join(',', postVM.Tags),
+                    //Tags = string.Join(',', postVM.Tags),
 
                     // Addition
                     Date = DateTime.Now,
-                    View = postVM.View,
-                    Like = postVM.Like,
-                    Dislike = postVM.Dislike
+                    TotalViews = postVM.View,
+                    TotalLikes = postVM.Like,
+                    TotalDislikes = postVM.Dislike
                 };
 
                 _postInterface.Add(post);
@@ -140,7 +140,7 @@ namespace RecipeWebsite.Controllers
                 Tags = await _context.RecipeTags.ToListAsync()
             };
 
-            post.Posts.View++;
+            post.Posts.TotalViews++;
 
             _context.Update(post.Posts);
             await _context.SaveChangesAsync();
@@ -153,8 +153,8 @@ namespace RecipeWebsite.Controllers
         {
             PostModel post = await _postInterface.GetByIdAsync(id);
 
-            post.Like++;
-            post.View--;
+            post.TotalLikes++;
+            post.TotalViews--;
 
             _context.Update(post);
             await _context.SaveChangesAsync();
@@ -169,8 +169,8 @@ namespace RecipeWebsite.Controllers
         {
             PostModel post = await _postInterface.GetByIdAsync(id);
 
-            post.Dislike++;
-            post.View--;
+            post.TotalDislikes++;
+            post.TotalViews--;
 
             _context.Update(post);
             await _context.SaveChangesAsync();
@@ -208,9 +208,9 @@ namespace RecipeWebsite.Controllers
 
                 // Addition
                 Date = post.Date,
-                View = post.View,
-                Like = post.Like,
-                Dislike = post.Dislike,
+                View = post.TotalViews,
+                Like = post.TotalLikes,
+                Dislike = post.TotalDislikes,
 
                 // Category List
                 CategoryList = await _context.RecipeCategories.ToListAsync(),
@@ -258,13 +258,13 @@ namespace RecipeWebsite.Controllers
 
                     // Category
                     Category = postVM.Category,
-                    Tags = string.Join(',', postVM.Tags),
+                    //Tags = string.Join(',', postVM.Tags),
 
                     // Addition
                     Date = postVM.Date,
-                    View = postVM.View,
-                    Like = postVM.Like,
-                    Dislike = postVM.Dislike,
+                    TotalViews = postVM.View,
+                    TotalLikes = postVM.Like,
+                    TotalDislikes = postVM.Dislike,
                 };
 
                 _postInterface.Update(post);
