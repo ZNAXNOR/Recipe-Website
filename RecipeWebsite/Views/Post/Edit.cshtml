@@ -62,10 +62,10 @@
                 </div>
             </div>
 
-            <!-- Collection Category -->
+            <!-- Recipe Tags -->
             <div class="form-group col-md-12 mb-3">
                 <label asp-for="Tags" for="myMultiselect">Collection Category</label>
-                @if (Model.TagsList.Count != 0)
+                @if (Model.Tags != null)
                 {
                     <div id="myMultiselect" class="multiselect">
                         <div id="mySelectLabel" class="selectBox" onclick="toggleCheckboxArea()">
@@ -75,11 +75,12 @@
                             <div class="overSelect"></div>
                         </div>
                         <div id="mySelectOptions">
-                            @foreach (var item in Model.TagsList)
+                            @for (int i = 0; i < Model.Tags.Count(); i++)
                             {
-                                <label asp-for="Tags" for="@item.TagsName">
-                                    <input type="checkbox" name="Tags" id="@item.TagsName" onchange="checkboxStatusChange()" value="@item.TagsName">
-                                    @item.TagsName
+                                <label class="form-check-label me-3" title="@Model.Tags[i].Description" for="@Model.Tags[i].Name">
+                                    <input type="checkbox" asp-for="@Model.Tags[i].Selected" class="form-check-input" id="@Model.Tags[i].Name">
+                                    <input type="hidden" asp-for="@Model.Tags[i].Id">
+                                    @Model.Tags[i].Name
                                 </label>
                             }
                         </div>

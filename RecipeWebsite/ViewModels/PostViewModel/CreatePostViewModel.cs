@@ -15,7 +15,7 @@ namespace RecipeWebsite.ViewModels.PostViewModel
 
         // Category
         public int Category { get; set; }
-        public List<string>? Tags { get; set; }
+        public List<int>? Tags { get; set; }
 
         // Category List
         public List<CategoryModel>? CategoryList { get; set; }

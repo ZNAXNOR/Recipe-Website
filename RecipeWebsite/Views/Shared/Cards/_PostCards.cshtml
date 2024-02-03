@@ -30,28 +30,17 @@
                 </div>
 
                 <!-- Tags -->
-                @* @if (item.Tags != null)
+                @if (item.Tags != null)
                 {
-                    var tags = item.Tags.Split(',');
-
-                    foreach (var tag in tags)
+                    foreach (var tag in item.PostTags)
                     {
-                        int tagInt = int.Parse(tag);
-
-                        var tagId = Model.Tags?.FirstOrDefault(p => p.Id == tagInt);
-
-                        var tagName = tagId?.TagsName;
-
-                        @if (tagName != null)
-                        {
-                            <a asp-controller="Tags" asp-action="Detail" asp-route-id="@tag" type="button" class="btn btn-dark btn-sm mb-2 shadow-none">@tagName</a>
-                        }
+                        <a asp-controller="Tags" asp-action="Detail" asp-route-id="@tag.TagId" type="button" class="btn btn-dark btn-sm mb-2 shadow-none">@tag.Tag.TagsName</a>
                     }
                 }
                 else
                 {
                     <p class="small text-secondary"> No tags available </p>
-                } *@
+                }
             
             </div>
 

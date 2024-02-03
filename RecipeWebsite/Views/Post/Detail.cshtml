@@ -7,8 +7,6 @@
     var postInfo = Model.Posts;
 
     var postCategory = Model.Categories;
-
-    var postTags = Model.Tags;
 }
 
 <div class="row">
@@ -125,20 +123,10 @@
                             <!-- Recipe Tags -->
                             @if (postInfo.Tags != null)
                             {
-                                // var tags = postInfo.Tags.Split(',');
-                                
-                                // foreach (var tag in tags)
-                                // {
-                                //     var tagId = postTags?.FirstOrDefault(p => p.Id == int.Parse(tag));
-
-                                //     var tagName = tagId?.TagsName;
-
-                                //     @if (tagName != null)
-                                //     {
-                                //         <a asp-controller="Tags" asp-action="Detail" asp-route-id="@tag" type="button" class="btn btn-outline-dark shadow-none btn-sm mb-2">@tagName</a>
-                                //     }
-                                    
-                                // }
+                                foreach (var tag in Model.Posts.PostTags)
+                                {
+                                    <a asp-controller="Tags" asp-action="Detail" asp-route-id="@tag.TagId" type="button" class="btn btn-dark btn-sm mb-2 shadow-none">@tag.Tag.TagsName</a>
+                                }
                             }
                             else
                             {

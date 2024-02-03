@@ -6,12 +6,15 @@ using RecipeWebsite.Interfaces;
 using RecipeWebsite.Models;
 using RecipeWebsite.ViewModels.CardsViewModel;
 using RecipeWebsite.ViewModels.PostViewModel;
+using SimpleWebsite.Models;
+using SimpleWebsite.ViewModels;
 
 namespace RecipeWebsite.Controllers
 {
     public class PostController : Controller
     {
         private readonly IPostInterface _postInterface;
+        public readonly ITagsInterface _tagsInterface;
         private readonly IPhotoInterface _photoInterface;
         private readonly ApplicationDbContext _context;
         private readonly IMemoryCache _cache;
@@ -19,12 +22,14 @@ namespace RecipeWebsite.Controllers
         public PostController(IPostInterface postInterface,
                                 IPhotoInterface photoInterface,
                                 ApplicationDbContext context,
-                                IMemoryCache cache)
+                                IMemoryCache cache,
+                                ITagsInterface tagsInterface)
         {
             _postInterface = postInterface;
             _photoInterface = photoInterface;
             _context = context;
             _cache = cache;
+            _tagsInterface = tagsInterface;
         }
 
 
@@ -44,9 +49,10 @@ namespace RecipeWebsite.Controllers
             // All Posts
             var CardPostVM = new CardsViewModel
             {
-                PostCard = await _context.Posts.ToListAsync(),
-                Categories = await _context.RecipeCategories.ToListAsync(),
-                Tags = await _context.RecipeTags.ToListAsync()
+                PostCard = await _context.Posts.Include(p => p.PostTags)
+                                .ThenInclude(t => t.Tag)
+                                .ToListAsync(),
+                Categories = await _context.RecipeCategories.ToListAsync()
             };
 
             return View(CardPostVM);
@@ -95,8 +101,20 @@ namespace RecipeWebsite.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Image
                 var result = await _photoInterface.AddPhotoAsync(postVM.Image);
-                
+
+                // Tags
+                var tags = await _tagsInterface.GetAll();
+
+                List<TagsModel> selectedTags = new List<TagsModel>();
+
+                if (postVM.Tags != null && postVM.Tags.Any())
+                {
+                    selectedTags = tags.Where(x => postVM.Tags.Contains(x.Id)).ToList();
+                }
+
+
                 var post = new PostModel
                 {
                     // Post
@@ -107,9 +125,9 @@ namespace RecipeWebsite.Controllers
                     Recipe = postVM.Recipe,
                     Image = result.Url.ToString(),
 
-                    // Category
+                    // Genere
                     Category = postVM.Category,
-                    //Tags = string.Join(',', postVM.Tags),
+                    Tags = selectedTags,
 
                     // Addition
                     Date = DateTime.Now,
@@ -135,9 +153,10 @@ namespace RecipeWebsite.Controllers
         {
             var post = new DetailPostViewModel
             {
-                Posts = await _postInterface.GetByIdAsync(id),
+                Posts = await _context.Posts.Include(p => p.PostTags)
+                                    .ThenInclude(t => t.Tag)
+                                    .SingleAsync(p => p.Id == id),
                 Categories = await _context.RecipeCategories.ToListAsync(),
-                Tags = await _context.RecipeTags.ToListAsync()
             };
 
             post.Posts.TotalViews++;
@@ -148,7 +167,7 @@ namespace RecipeWebsite.Controllers
             return View(post);
         }
 
-        // Like
+        // Total Likes
         public async Task<IActionResult> Like(int id)
         {
             PostModel post = await _postInterface.GetByIdAsync(id);
@@ -164,7 +183,7 @@ namespace RecipeWebsite.Controllers
             return Redirect(url);
         }
 
-        // Dislike
+        // Total Dislikes
         public async Task<IActionResult> Dislike(int id)
         {
             PostModel post = await _postInterface.GetByIdAsync(id);
@@ -185,11 +204,41 @@ namespace RecipeWebsite.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
+            // Id Check
             var post = await _postInterface.GetByIdAsync(id);
 
+            // Check
             if (post == null)
             {
                 return View("Error");
+            }
+
+            // Initialize Selected Tags
+            var Results = from t in _context.RecipeTags
+                          select new
+                          {
+                              t.Id,
+                              t.TagsName,
+                              t.TagsDescription,
+                              Selected = ((from pt in _context.PostTags
+                                           where (pt.PostId == id) & (pt.TagId == t.Id)
+                                           select pt).Count() > 0),
+
+                          };
+
+            // Tags List
+            var TagList = new List<SelectedItemViewModel>();
+
+            // Selected Tags
+            foreach (var item in Results)
+            {
+                TagList.Add(new SelectedItemViewModel
+                {
+                    Id = item.Id,
+                    Name = item.TagsName,
+                    Description = item.TagsDescription,
+                    Selected = item.Selected
+                });
             }
 
             var postVM = new EditPostViewModel
@@ -202,9 +251,9 @@ namespace RecipeWebsite.Controllers
                 URL = post.Image,
                 Recipe = post.Recipe,
 
-                // Category
+                // Genere
                 Category = post.Category,
-                //// Tags = string.Join(',', post.Tags), //// Do not open
+                Tags = TagList,
 
                 // Addition
                 Date = post.Date,
@@ -212,9 +261,8 @@ namespace RecipeWebsite.Controllers
                 Like = post.TotalLikes,
                 Dislike = post.TotalDislikes,
 
-                // Category List
-                CategoryList = await _context.RecipeCategories.ToListAsync(),
-                TagsList = await _context.RecipeTags.ToListAsync()
+                // Genere List
+                CategoryList = await _context.RecipeCategories.ToListAsync()
             };
             return View(postVM);
         }
@@ -223,12 +271,15 @@ namespace RecipeWebsite.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, EditPostViewModel postVM)
         {
-            if (!ModelState.IsValid)
+            // Check
+            if (ModelState.IsValid)
             {
                 ModelState.AddModelError("", "Failed to edit post");
+
                 return View("Edit", postVM);
             }
 
+            // Id Select
             var userPost = await _postInterface.GetByIdAsyncNoTracking(id);
 
 
@@ -256,9 +307,8 @@ namespace RecipeWebsite.Controllers
                     Recipe = postVM.Recipe,
                     Image = photoResult.Url.ToString(),
 
-                    // Category
+                    // Genere
                     Category = postVM.Category,
-                    //Tags = string.Join(',', postVM.Tags),
 
                     // Addition
                     Date = postVM.Date,
@@ -266,6 +316,28 @@ namespace RecipeWebsite.Controllers
                     TotalLikes = postVM.Like,
                     TotalDislikes = postVM.Dislike,
                 };
+
+                // Delete Selected Tags
+                foreach (var item in _context.PostTags)
+                {
+                    if (item.PostId == id)
+                    {
+                        _context.Entry(item).State = EntityState.Deleted;
+                    }
+                }
+
+                // Update Selected tags
+                foreach (var item in postVM.Tags)
+                {
+                    if (item.Selected)
+                    {
+                        _context.PostTags.Add(new PostTagModel()
+                        {
+                            PostId = id,
+                            TagId = item.Id
+                        });
+                    }
+                }
 
                 _postInterface.Update(post);
 

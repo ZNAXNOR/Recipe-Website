@@ -1,4 +1,5 @@
 ﻿using RecipeWebsite.Models;
+using SimpleWebsite.ViewModels;
 
 namespace RecipeWebsite.ViewModels.PostViewModel
 {
@@ -14,13 +15,12 @@ namespace RecipeWebsite.ViewModels.PostViewModel
         public IFormFile Image { get; set; }
         public string? URL { get; set; }
 
-        // Category
+        // Genere
         public int Category { get; set; }
-        public List<string>? Tags { get; set; }
+        public List<SelectedItemViewModel> Tags { get; set; }
 
-        // Category List
-        public List<CategoryModel>? CategoryList { get; set; }
-        public List<TagsModel>? TagsList { get; set; }
+        // Genere List
+        public List<CategoryModel>? CategoryList { get; set; }        
 
         // Addition
         public DateTime Date {  get; set; }

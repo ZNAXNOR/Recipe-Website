@@ -1,4 +1,5 @@
 ﻿using RecipeWebsite.Models;
+using SimpleWebsite.ViewModels;
 
 namespace RecipeWebsite.ViewModels.CardsViewModel
 {

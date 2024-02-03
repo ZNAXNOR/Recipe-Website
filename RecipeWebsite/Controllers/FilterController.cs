@@ -36,7 +36,7 @@ namespace RecipeWebsite.Controllers
             {
                 PostCard = await filteredPost.ToListAsync(),
                 Categories = await _context.RecipeCategories.ToListAsync(),
-                Tags = await _context.RecipeTags.ToListAsync()
+                //Tags = await _context.RecipeTags.ToListAsync()
             };
 
             _cache.Set("filteredCategory", filteredCategory);

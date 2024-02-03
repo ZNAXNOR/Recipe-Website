@@ -22,7 +22,9 @@ namespace RecipeWebsite.Data
         public DbSet<CategoryModel> RecipeCategories { get; set; }
 
 
+
         // Relations
+
         // PostTags
         public DbSet<PostTagModel> PostTags { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -246,7 +246,7 @@ namespace RecipeWebsite.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RecipeCategories");
+                    b.ToTable("RecipeCategories", (string)null);
                 });
 
             modelBuilder.Entity("RecipeWebsite.Models.CollectionModel", b =>
@@ -276,7 +276,7 @@ namespace RecipeWebsite.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.ToTable("Collections");
+                    b.ToTable("Collections", (string)null);
                 });
 
             modelBuilder.Entity("RecipeWebsite.Models.PostModel", b =>
@@ -331,7 +331,7 @@ namespace RecipeWebsite.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.ToTable("Posts");
+                    b.ToTable("Posts", (string)null);
                 });
 
             modelBuilder.Entity("RecipeWebsite.Models.TagsModel", b =>
@@ -351,7 +351,7 @@ namespace RecipeWebsite.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RecipeTags");
+                    b.ToTable("RecipeTags", (string)null);
                 });
 
             modelBuilder.Entity("SimpleWebsite.Models.PostTagModel", b =>
@@ -366,7 +366,7 @@ namespace RecipeWebsite.Migrations
 
                     b.HasIndex("TagId");
 
-                    b.ToTable("PostTags");
+                    b.ToTable("PostTags", (string)null);
                 });
 
             modelBuilder.Entity("RecipeWebsite.Models.AppUserModel", b =>

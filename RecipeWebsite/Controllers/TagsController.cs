@@ -78,7 +78,7 @@ namespace RecipeWebsite.Controllers
                 PostCard = taggedPosts,
 
                 Categories = await _context.RecipeCategories.ToListAsync(),
-                Tags = await _context.RecipeTags.ToListAsync()
+                //Tags = await _context.RecipeTags.ToListAsync()
             };
 
             return View(TaggedPostVM);

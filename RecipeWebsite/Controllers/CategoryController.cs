@@ -74,7 +74,7 @@ namespace RecipeWebsite.Controllers
                 CategoryInfo = await _categoryInterface.GetByIdAsync(id),
                 PostCard = await postCategory.ToListAsync(),
                 Categories = await _context.RecipeCategories.ToListAsync(),
-                Tags = await _context.RecipeTags.ToListAsync()
+                //Tags = await _context.RecipeTags.ToListAsync()
             };
 
             return View(PostCategoryVM);
