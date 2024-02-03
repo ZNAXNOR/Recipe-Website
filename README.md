@@ -1,60 +1,114 @@
 <h1 align='center'> Recipe Website <sup>2</sup> </h1>
+
+<!-- Tools -->
+<div align='center'>
+
+<table>
   
-<h3 align='center'> Database </h3>
-<p align='center'>
-  <a href="#">
-      <img src="https://img.shields.io/badge/Microsoft%20SQL%20Server-CC2927?style=for-the-badge&logo=microsoft%20sql%20server&logoColor=white" />        
-  </a>
-</p>
+<tr> </tr>
 
-<h3 align='center'> Languages </h3>
-<p align='center'>
-  <a href="#">
-      <img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white" />
-  </a> 
-  &nbsp;&nbsp;
-  <a href="#">
-      <img src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E" />        
-  </a>
-  &nbsp;&nbsp;
-  <a href="#">
-      <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />        
-  </a>
-  &nbsp;&nbsp;
-  <a href="#">
-      <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" />        
-  </a>
-</p>
+  <!-- Frontend -->
+  <td valign="top">
+    <h2 align='center'> Frontend </h2>
+    <div align="center">      
+      <a href="https://getbootstrap.com/" title="Bootstrap">
+        <img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/bootstrap-plain.svg" alt="Bootstrap" height="50">
+      </a>  
+      &nbsp;
+      <a href="https://www.w3schools.com/css/" title="CSS3">
+        <img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/css3-original-wordmark.svg" alt="CSS3" height="50">
+      </a>  
+      <br>
+      <a href="https://html.com/" title="HTML5">
+        <img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/html5-original-wordmark.svg" alt="HTML5" height="50">
+      </a>  
+      &nbsp;
+      <a href="https://www.javascript.com/" title="JavaScript">
+        <img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/javascript-original.svg" alt="JavaScript" height="50">
+      </a>  
+    </div>  
+  </td>
 
-<h3 align='center'> Framework </h3>
-<p align='center'>
-  <a href="#">
-      <img src="https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" />        
-  </a>
-</p>
+  <!-- Backend -->
+  <td valign="top">
+    <h2 align='center'> Backend </h2>
+    <div align="center">      
+      <a href="https://www.javascript.com/" title="JavaScript">
+        <img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/javascript-original.svg" alt="JavaScript" height="50">
+      </a>
+      &nbsp;
+      <a href="https://docs.microsoft.com/en-us/dotnet/csharp/" title="C#">
+        <img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/csharp-original.svg" alt="C#" height="50">
+      </a> 
+    </div>  
+  </td>
+  
+  <!-- Database -->
+  <td valign="top">
+    <h2 align='center'> Database </h2>
+    <div align="center">      
+      <a href="https://www.microsoft.com/en-in/sql-server/sql-server-downloads" title="MSSQL">
+        <img src="https://github.com/ZNAXNOR/Simple-Website/assets/121810601/fdeff82c-eba0-4f3c-82a8-8a2b3e9d0678"  alt="MSSQL" height="50"/>
+      </a>  
+    </div>
+  </td>
+  
+  <!-- Framework -->
+  <td valign="top">
+    <h2 align='center'> Framework </h2>
+    <div align="center">      
+      <a href="https://dotnet.microsoft.com/download" title=".Net Core">
+        <img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/dotnetcore.png" alt=".Net Core" height="50">
+      </a> 
+    </div>
+
+  </td>
+  
+  <!-- Thirdparty-->
+  <td valign="top">
+    <h2 align='center'> Thirdparty</h2>
+    <div align="center">      
+      <a href="https://myaccount.google.com/apppasswords" title="Google SMTP">
+        <img style="margin: 10px" src="https://github.com/ZNAXNOR/Recipe-Website/assets/121810601/a88cbf32-9cd0-4cf7-8312-40f10ad18ff3" alt="Gmail SMTP" height="50">
+      </a>  
+      &nbsp;&nbsp;
+      <a href="https://cloudinary.com/" title="Cloudinary">
+        <img style="margin: 10px" src="https://github.com/ZNAXNOR/Recipe-Website/assets/121810601/24107e67-a68f-4a2b-8a56-eba4cafb0298" alt="Cloudinary" height="50">
+      </a>
+    </div>
+  </td>
+
+</table> 
+
+</div>
+
+<br/>
 
 ### This project is being created using [ASP.NET Core] ( [MVC] )
 
-**The aim of this project** is to create a website for users to be able to create, view, edit and delete recipes. The created recipes can be made public, shared to select few, or be kept private.
+*The primary objective* is to establish a website enabling users to create, view, edit, and delete recipes. Users will have the flexibility to make their recipes public, share them with specific individuals, or keep them private.
 
-**The goal of this project** is to create a website that can provide all possible tools to the user that can allow them to store the recipe safely. 
+*The overarching aim* of this project is to construct a comprehensive website equipped with various tools, enabling users to securely store their recipes.
 
 [ASP.NET Core]: https://dotnet.microsoft.com/en-us/apps/aspnet
 [MVC]: https://learn.microsoft.com/en-us/aspnet/core/mvc/
 
 ---
 
-
 ## Changes from [RecipeWebsite]
-### [Cards] are shared.
+***[Cards] are shared.***
   - Same cards are shared to all pages making code maintainence easier.
   - **_Post cards_** and **_Collection cards_** are seperated.
 
-### [Enum files] are replaced by database tables.
+<br>
+
+***[Enum files] are replaced by database tables.***
   - **Categories** uses database tables now.
   - Categories can be managed (_Create, Edit, Delete_) directly by the users.
+
+<br>
  
-### *Files re-named* to be:
+***Files re-named to be:***
   - Unique
   - Easier to distinguish.
   - Not confusing.
@@ -68,7 +122,7 @@
 ---
 
 ## Task
-<sub> Tasks are located in **[Issues]**. Click/Hover over them for more information </sub>
+*Tasks are located in **[Issues]**. Click/Hover over them for more information*
 - **[Posts]**
 - **[Recipe Videos]**
 - **[Recipe Collection]**
@@ -91,27 +145,33 @@
 ---
 
 ## [NuGet Packages]
-### [Bootstrap]
-> The most popular front-end framework for developing responsive, mobile first projects on the web.
 
-### [CloudinaryDotNet]
+**[CloudinaryDotNet]**
 > The Cloudinary .NET SDK allows you to quickly and easily integrate your application with Cloudinary. Effortlessly optimize, transform, upload and manage your cloud's assets.
 - Documentation [here](https://cloudinary.com/documentation/)
 
-### [Microsoft.AspNetCore.Identity.EntityFrameworkCore]
+<br>
+
+**[Microsoft.AspNetCore.Identity.EntityFrameworkCore]**
 > ASP.NET Core Identity provider that uses Entity Framework Core.
 - The package was built from this [source code](https://github.com/dotnet/aspnetcore/tree/3f1acb59718cadf111a0a796681e3d3509bb3381)
 
-### [Microsoft.EntityFrameworkCore]
+<br>
+
+**[Microsoft.EntityFrameworkCore]**
 > Entity Framework Core is a modern object-database mapper for .NET. It supports LINQ queries, change tracking, updates, and schema migrations. EF Core works with SQL Server, Azure SQL Database, SQLite, Azure Cosmos DB, MySQL, PostgreSQL, and other databases through a provider plugin API.
 - Commonly Used Types:
   - Microsoft.EntityFrameworkCore.DbContext
   - Microsoft.EntityFrameworkCore.DbSet
 
-### [Microsoft.EntityFrameworkCore.SqlServer]
+<br>
+
+**[Microsoft.EntityFrameworkCore.SqlServer]**
 > Microsoft SQL Server database provider for Entity Framework Core.
 
-### [Microsoft.EntityFrameworkCore.Tools]
+<br>
+
+**[Microsoft.EntityFrameworkCore.Tools]**
 > Entity Framework Core Tools for the NuGet Package Manager Console in Visual Studio.
 - Enables these commonly used commands:
   - Add-Migration
@@ -136,18 +196,20 @@
 ---
 
 ## API's
-### [Cloudinary]
+**[Cloudinary]**
 > **Used as image database.**
-- **Resources used**
+- Resources used
   - CloudName
   - ApiKey
   - ApiSecret
 
 [Cloudinary]: https://cloudinary.com/
 
-### [Google SMTP]
+<br>
+
+**[Google SMTP]**
 > **Used for sending emails.**
-- **Resources used**
+- Resources used
   - Host: smtp.gmail.com [^Host]
   - Port: 587 [^Port] 
   - Username: _App secret account Email_
