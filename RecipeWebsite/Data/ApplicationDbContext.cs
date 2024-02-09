@@ -17,23 +17,35 @@ namespace RecipeWebsite.Data
         public DbSet<CollectionModel> Collections { get; set; }
         public DbSet<PostModel> Posts { get; set; }
 
-        // Genere
+        // Genre
         public DbSet<TagsModel> RecipeTags { get; set; }
         public DbSet<CategoryModel> RecipeCategories { get; set; }
 
 
 
-        // Relations
+        // Many-To-Many Relations
 
         // PostTags
         public DbSet<PostTagModel> PostTags { get; set; }
+
+        // PostCollections
+        public DbSet<PostCollectionModel> PostCollections { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            // PostTags
             modelBuilder.Entity<PostModel>()
                 .HasMany(e => e.Tags)
                 .WithMany(e => e.Posts)
                 .UsingEntity<PostTagModel>();
+
+            // PostCollections
+            modelBuilder.Entity<PostModel>()
+                .HasMany(e => e.Collections)
+                .WithMany(e => e.Posts)
+                .UsingEntity<PostCollectionModel>();
         }
     }
 }

@@ -33,12 +33,12 @@ namespace RecipeWebsite.Repositories
 
         public async Task<CollectionModel> GetByIdAsync(int id)
         {
-            return await _context.Collections.FirstOrDefaultAsync(i => i.Id == id);
+            return await _context.Collections.FirstOrDefaultAsync(i => i.CollectionId == id);
         }
 
         public async Task<CollectionModel> GetByIdAsyncNoTracking(int id)
         {
-            return await _context.Collections.AsNoTracking().FirstOrDefaultAsync(i => i.Id == id);
+            return await _context.Collections.AsNoTracking().FirstOrDefaultAsync(i => i.CollectionId == id);
         }
 
         public bool Save()

@@ -1,4 +1,6 @@
-﻿@model CollectionModel
+﻿@using RecipeWebsite.ViewModels.ManyToMany
+
+@model CollectedPostViewModel
 
 <!-- Page Content -->
 <main>
@@ -7,20 +9,20 @@
         <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
 
             <div class="col-10 col-sm-8 col-lg-6">
-                <img src="@Model.Image" class="d-block mx-lg-auto img-fluid" width="700" height="500" loading="lazy">
+                <img src="@Model.CollectionInfo.CollectionImage" class="d-block mx-lg-auto img-fluid" width="700" height="500" loading="lazy">
             </div>
 
             <div class="col-lg-6">
 
-                <h1 class="display-6 fw-bold text-body-emphasis lh-1 mb-4">@Model.Title</h1>
+                <h1 class="display-6 fw-bold text-body-emphasis lh-1 mb-4">@Model.CollectionInfo.CollectionTitle</h1>
                 
-                <p class="lead fst-italic">@Model.Description</p>
+                <p class="lead fst-italic">@Model.CollectionInfo.CollectionDescription</p>
                 
                 <div class="d-grid gap-2 d-md-flex justify-content-md-start">
                     
                     <a href="#" type="button" class="btn btn-primary btn-lg px-4"><i class='bx bxs-message-square-add bx-flip-horizontal'></i> Add Posts </a>
                     
-                    <a asp-controller="Collection" asp-action="Edit" asp-route-id="@Model.Id" type="button" class="btn btn-outline-secondary btn-lg px-4 me-md-2"><i class='bx bxs-edit-alt'></i> Edit collection </a>
+                    <a asp-controller="Collection" asp-action="Edit" asp-route-id="@Model.CollectionInfo.CollectionId" type="button" class="btn btn-outline-secondary btn-lg px-4 me-md-2"><i class='bx bxs-edit-alt'></i> Edit collection </a>
                 </div>
             
             </div>
@@ -34,7 +36,7 @@
 
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="category-recipe">
 
-                @* <partial name="~/Views/Shared/Cards/_CollectionCards.cshtml" /> *@
+                <partial name="~/Views/Shared/Cards/_CollectedPostCards.cshtml" />
 
             </div>
 

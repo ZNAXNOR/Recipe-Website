@@ -15,11 +15,11 @@ namespace RecipeWebsite.ViewModels.PostViewModel
         public IFormFile Image { get; set; }
         public string? URL { get; set; }
 
-        // Genere
+        // Genre
         public int Category { get; set; }
-        public List<SelectedItemViewModel> Tags { get; set; }
+        public List<SelectedItemViewModel> SelectedItems { get; set; }
 
-        // Genere List
+        // Genre List
         public List<CategoryModel>? CategoryList { get; set; }        
 
         // Addition

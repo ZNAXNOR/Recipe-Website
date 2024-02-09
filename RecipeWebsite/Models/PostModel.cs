@@ -32,8 +32,13 @@ namespace RecipeWebsite.Models
 
         // Tags
         public List<TagsModel> Tags { get; set; } = new List<TagsModel>();
+
+        // Collection
+        public List<CollectionModel> Collections { get; set; } = new List<CollectionModel>();
+
         // Many To Many
         public virtual List<PostTagModel> PostTags { get; set; } = new List<PostTagModel>();
+        public virtual List<PostCollectionModel> PostCollectionModels { get; set; } = new List<PostCollectionModel>();
 
 
         // App User

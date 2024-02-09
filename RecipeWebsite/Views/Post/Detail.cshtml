@@ -185,10 +185,39 @@
                             
                             </div>
 
+                            <!-- Collection -->
+                            <form method="post" asp-action="Detail" enctype="multipart/form-data">
+                                <div class="form-group col-md-12 mb-3 pt-lg-5">
+                                    <label asp-for="SelectedItems" for="myMultiselect">Add to Collection</label>
+                                    @if (Model.SelectedItems != null)
+                                    {
+                                        <div id="myMultiselect" class="multiselect">
+                                            <div id="mySelectLabel" class="selectBox" onclick="toggleCheckboxArea()">
+                                                <select class="form-select">
+                                                    <option> #Input values go here</option>
+                                                </select>
+                                                <div class="overSelect"></div>
+                                            </div>
+                                            <div id="mySelectOptions">
+                                                @for (int i = 0; i < Model.SelectedItems.Count(); i++)
+                                                {
+                                                    <label class="form-check-label me-3" title="@Model.SelectedItems[i].Description" for="@Model.SelectedItems[i].Name">
+                                                        <input type="checkbox" asp-for="@Model.SelectedItems[i].Selected" class="form-check-input" id="@Model.SelectedItems[i].Name">
+                                                        <input type="hidden" asp-for="@Model.SelectedItems[i].Id">
+                                                        @Model.SelectedItems[i].Name
+                                                    </label>
+                                                }
+                                                <button type="submit" class="btn btn-primary btn-sm px-4 gap-3 mt-3">Post Recipe</button>
+                                            </div>                                            
+                                        </div>
+                                    }
+                                </div>
+                            </form>
+
                         </div>
                     </div>
 
-                    <!-- Youtube Link -->
+                    <!-- YouTube Link -->
                     @if (postInfo.Link != null)
                     {
                         <h5 class="fst-italic pb-3 mb-4 border-bottom" id="youtube-recipe-link">
@@ -299,10 +328,12 @@
 
 <!--Added JS-->
 <script src="~/js/created/radio-checkbox.js"></script>
+<script src="~/js/created/multiselect-dropdown.js"></script>
 
 <!-- Added Ajax -->
 <script src="~/js/created/like.js"></script>
 <script src="~/js/created/dislike.js"></script>
 
-<!--Adde CSS-->
+<!--Added CSS-->
 <link rel="stylesheet" href="~/css/created/tableOfContent.css" />
+<link rel="stylesheet" href="~/css/created/multiselect-dropdown.css" />

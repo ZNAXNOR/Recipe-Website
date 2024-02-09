@@ -7,7 +7,14 @@ namespace RecipeWebsite.ViewModels.PostViewModel
     {
         public PostModel Posts { get; set; }
         public List<CategoryModel>? Categories { get; set; }
-        //public List<TagsModel>? Tags { get; set; }
-        public List<SelectedItemViewModel> Tags { get; set; }
+
+        // Collection
+        public List<int>? Collections { get; set; }
+
+        // Selected
+        public List<SelectedItemViewModel> SelectedItems { get; set; }
+
+        // Category List
+        public List<CollectionModel>? CollectionList { get; set; }
     }
 }

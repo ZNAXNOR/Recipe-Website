@@ -25,7 +25,7 @@ namespace RecipeWebsite.Controllers
                 posts = posts.Where(p => p.Title!.Contains(searchString) ||
                                          p.Ingredient!.Contains(searchString));
 
-                collections = collections.Where(c => c.Title!.Contains(searchString));
+                collections = collections.Where(c => c.CollectionTitle!.Contains(searchString));
             }
 
             var CardPostVM = new CardsViewModel

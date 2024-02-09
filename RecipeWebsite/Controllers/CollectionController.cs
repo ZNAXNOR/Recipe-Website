@@ -5,6 +5,7 @@ using RecipeWebsite.Interfaces;
 using RecipeWebsite.Models;
 using RecipeWebsite.ViewModels.CardsViewModel;
 using RecipeWebsite.ViewModels.CollectionViewModel;
+using RecipeWebsite.ViewModels.ManyToMany;
 
 namespace RecipeWebsite.Controllers
 {
@@ -22,38 +23,29 @@ namespace RecipeWebsite.Controllers
         }
 
 
-        // Index
+
         [HttpGet]
         public async Task<IActionResult> Index(string searchString)
         {
-            var collections = from c in _context.Collections select c;
+            var collections = from collection in _context.Collections select collection;
 
             if (!string.IsNullOrEmpty(searchString))
             {
                 TempData["collectionSearch"] = searchString;
 
-                collections = collections.Where(s => s.Title!.Contains(searchString));
+                collections = collections.Where(search_string => search_string.CollectionTitle!.Contains(searchString));
             }
 
-            var CardPostVM = new CardsViewModel
+            var CollectedPostVM = new CardsViewModel
             {
                 CollectionCard = await collections.ToListAsync()
             };
 
-            return View(CardPostVM);
+            return View(CollectedPostVM);
         }
 
 
-        // Detail
-        public async Task<IActionResult> Detail(int id)
-        {
-            CollectionModel collection = await _collectionInterface.GetByIdAsync(id);
 
-            return View(collection);
-        }
-
-
-        // Create
         public IActionResult Create()
         {
             return View();
@@ -68,9 +60,9 @@ namespace RecipeWebsite.Controllers
 
                 var collection = new CollectionModel
                 {
-                    Title = collectionVM.Title,
-                    Description = collectionVM.Description,
-                    Image = result.Url.ToString()
+                    CollectionTitle = collectionVM.Title,
+                    CollectionDescription = collectionVM.Description,
+                    CollectionImage = result.Url.ToString()
                 };
                 _collectionInterface.Add(collection);
 
@@ -84,7 +76,28 @@ namespace RecipeWebsite.Controllers
         }
 
 
-        // Edit
+
+        public async Task<IActionResult> Detail(int id)
+        {
+            var collectedPosts = _context.Collections.Include(postCollections => postCollections.PostCollections)
+                                                .ThenInclude(post => post.Post)
+                                                .ThenInclude(tag => tag.Tags)
+                                                .Where(collection => collection.CollectionId == id);
+
+            var CollectedPostVM = new CollectedPostViewModel
+            {
+                CollectionInfo = await _collectionInterface.GetByIdAsync(id),
+
+                Collections = await collectedPosts.ToListAsync(),
+
+                Categories = await _context.RecipeCategories.ToListAsync()
+            };
+
+            return View(CollectedPostVM);
+        }
+
+
+
         public async Task<IActionResult> Edit(int id)
         {
             var collection = await _collectionInterface.GetByIdAsync(id);
@@ -95,17 +108,16 @@ namespace RecipeWebsite.Controllers
 
             var collectionVM = new EditCollectionViewModel
             {
-                Title = collection.Title,
-                Description = collection.Description,
-                URL = collection.Image
+                Title = collection.CollectionTitle,
+                Description = collection.CollectionDescription,
+                URL = collection.CollectionImage
             };
 
             return View(collectionVM);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id,
-                                                EditCollectionViewModel collectionVM)
+        public async Task<IActionResult> Edit(int id, EditCollectionViewModel collectionVM)
         {
             if (!ModelState.IsValid)
             {
@@ -120,7 +132,7 @@ namespace RecipeWebsite.Controllers
             {
                 try
                 {
-                    await _photoInterface.DeletePhotoAsync(userCollection.Image);
+                    await _photoInterface.DeletePhotoAsync(userCollection.CollectionImage);
                 }
                 catch (Exception ex)
                 {
@@ -133,10 +145,10 @@ namespace RecipeWebsite.Controllers
 
                 var collection = new CollectionModel
                 {
-                    Id = id,
-                    Title = collectionVM.Title,
-                    Description = collectionVM.Description,
-                    Image = photoResult.Url.ToString()
+                    CollectionId = id,
+                    CollectionTitle = collectionVM.Title,
+                    CollectionDescription = collectionVM.Description,
+                    CollectionImage = photoResult.Url.ToString()
                 };
                 _collectionInterface.Update(collection);
 
@@ -149,7 +161,7 @@ namespace RecipeWebsite.Controllers
         }
 
 
-        // Delete
+
         public async Task<IActionResult> Delete(int id)
         {
             var collectionDetails = await _collectionInterface.GetByIdAsync(id);

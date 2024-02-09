@@ -15,55 +15,47 @@
 
                 <h4 class="mb-4">Collection Details</h4>
 
-                <!-- Title -->
                 <div class="col-sm-12 mb-3">
-                    <label asp-for="Title" class="form-label">Collection Title</label>
-                    <input asp-for="Title" type="text" class="form-control" id="title" placeholder="" required disabled readonly>
+                    <label asp-for="CollectionTitle" class="form-label">Collection Title</label>
+                    <input asp-for="CollectionTitle" type="text" class="form-control" id="title" placeholder="" required disabled readonly>
                     <div class="invalid-feedback">
                         Collection Title is required.
                     </div>
                 </div>
 
-                <!-- Description -->
                 <div class="col-sm-12 mb-3">
-                    <label asp-for="Description" class="form-label">Recipe Description</label>
-                    <input asp-for="Description" type="text" class="form-control" id="description" placeholder="" required disabled readonly>
+                    <label asp-for="CollectionDescription" class="form-label">Recipe Description</label>
+                    <input asp-for="CollectionDescription" type="text" class="form-control" id="description" placeholder="" required disabled readonly>
                     <div class="invalid-feedback">
                         Collection Description is required.
                     </div>
                 </div>
 
-                <!-- Image -->
                 <div class="col-12 mb-5">
-                    <label asp-for="Image">Image</label>
-                    <input asp-for="Image" type="file" class="form-control" id="image" placeholder="Thumbnail" required disabled readonly>
-                    <span asp-validation-for="Image" class="text-danger"></span>
+                    <label asp-for="CollectionImage">Image</label>
+                    <input asp-for="CollectionImage" type="file" class="form-control" id="image" placeholder="Thumbnail" required disabled readonly>
+                    <span asp-validation-for="CollectionImage" class="text-danger"></span>
                     <div class="invalid-feedback">
                         Collection Thumbnail is required.
                     </div>
                 </div>
 
-                <!-- Delete -->
                 <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
                     <button type="button" class="btn btn-danger btn-lg px-4 gap-3" data-bs-toggle="modal" data-bs-target="#recipeDeleteModal">Delete Recipe</button>
                     <a class="btn btn-secondary btn-lg px-4" asp-area="" asp-controller="Collection" asp-action="Index">Cancel</a>
                 </div>
 
-                <!-- Delete Confirmation -->
                 <div class="modal fade" id="recipeDeleteModal" tabindex="-1">
                     <div class="modal-dialog modal-lg modal-dialog-centered">
                         <div class="modal-content">
-                            <!-- Model Header -->
                             <div class="modal-header bg-dark text-white">
                                 <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm Recipe Delete?</h1>
                                 <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <!-- Model Body -->
                             <div class="modal-body">
-                                <p class="fs-4">Are you sure you want to delete <strong>@Model.Title</strong> ?</p>
+                                <p class="fs-4">Are you sure you want to delete <strong>@Model.CollectionTitle</strong> ?</p>
                                 <p class="fst-italic"><small>This action<code> cannot be reverted</code>.</small></p>
                             </div>
-                            <!-- Model Buttons -->
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-danger">Confirm Delete</button>

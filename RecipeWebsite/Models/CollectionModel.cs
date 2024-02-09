@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using SimpleWebsite.Models;
 
 namespace RecipeWebsite.Models
 {
@@ -7,17 +8,14 @@ namespace RecipeWebsite.Models
     {
         // Collection
         [Key]
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public string Image { get; set; }
+        public int CollectionId { get; set; }
+        public string CollectionTitle { get; set; }
+        public string? CollectionDescription { get; set; }
+        public string CollectionImage { get; set; }
 
-
-        // Category
-        //public Tags Tags { get; set; }
-
-
-        // App User
+        public List<PostModel> Posts { get; set; }
+        public virtual List<PostCollectionModel> PostCollections { get; set; }
+        
         [ForeignKey("AppUser")]
         public string? AppUserId { get; set; }
         public AppUserModel? AppUser { get; set; }

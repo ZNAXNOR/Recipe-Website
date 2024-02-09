@@ -8,8 +8,5 @@
         public string Description { get; set; }
         public IFormFile Image { get; set; }
         public string? URL { get; set; }
-
-        // Category
-        //public Tags Tags { get; set; }
     }
 }

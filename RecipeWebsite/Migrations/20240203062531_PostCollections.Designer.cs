@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RecipeWebsite.Data;
 
@@ -11,9 +12,11 @@ using RecipeWebsite.Data;
 namespace RecipeWebsite.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240203062531_PostCollections")]
+    partial class PostCollections
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -251,27 +254,28 @@ namespace RecipeWebsite.Migrations
 
             modelBuilder.Entity("RecipeWebsite.Models.CollectionModel", b =>
                 {
-                    b.Property<int>("CollectionId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CollectionId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("AppUserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("CollectionDescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CollectionImage")
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CollectionTitle")
+                    b.Property<string>("Image")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CollectionId");
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("AppUserId");
 
@@ -365,7 +369,7 @@ namespace RecipeWebsite.Migrations
 
                     b.HasIndex("PostId");
 
-                    b.ToTable("PostCollections");
+                    b.ToTable("PostCollectionModel");
                 });
 
             modelBuilder.Entity("SimpleWebsite.Models.PostTagModel", b =>
@@ -380,7 +384,7 @@ namespace RecipeWebsite.Migrations
 
                     b.HasIndex("TagId");
 
-                    b.ToTable("PostTags");
+                    b.ToTable("PostTagModel");
                 });
 
             modelBuilder.Entity("RecipeWebsite.Models.AppUserModel", b =>
