@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "N8AUWDIYdmscWW+zylLjqqJFMuasIfGnpmGz7i5te5E=",
+  "Source": "AspireRecipeWebsite.ApiService",
+  "BasePath": "_content/AspireRecipeWebsite.ApiService",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
