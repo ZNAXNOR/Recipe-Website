@@ -1,9 +1,0 @@
-G:\OMKAR\Visual Studio\Recipe-Website\RecipeWebsite\obj\Debug\net7.0\RecipeWebsite.csproj.AssemblyReference.cache
-G:\OMKAR\Visual Studio\Recipe-Website\RecipeWebsite\obj\Debug\net7.0\RecipeWebsite.GeneratedMSBuildEditorConfig.editorconfig
-G:\OMKAR\Visual Studio\Recipe-Website\RecipeWebsite\obj\Debug\net7.0\RecipeWebsite.AssemblyInfoInputs.cache
-G:\OMKAR\Visual Studio\Recipe-Website\RecipeWebsite\obj\Debug\net7.0\RecipeWebsite.AssemblyInfo.cs
-G:\OMKAR\Visual Studio\Recipe-Website\RecipeWebsite\obj\Debug\net7.0\RecipeWebsite.csproj.CoreCompileInputs.cache
-G:\OMKAR\Visual Studio\Recipe-Website\RecipeWebsite\obj\Debug\net7.0\RecipeWebsite.MvcApplicationPartsAssemblyInfo.cs
-G:\OMKAR\Visual Studio\Recipe-Website\RecipeWebsite\obj\Debug\net7.0\RecipeWebsite.MvcApplicationPartsAssemblyInfo.cache
-G:\OMKAR\Visual Studio\Recipe-Website\RecipeWebsite\obj\Debug\net7.0\RecipeWebsite.RazorAssemblyInfo.cache
-G:\OMKAR\Visual Studio\Recipe-Website\RecipeWebsite\obj\Debug\net7.0\RecipeWebsite.RazorAssemblyInfo.cs
