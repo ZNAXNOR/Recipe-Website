@@ -4,13 +4,15 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <UserSecretsId>f18f81b9-ea04-426c-a25b-587abf69e8a9</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AspireRecipeWebsite.ServiceDefaults\AspireRecipeWebsite.ServiceDefaults.csproj" />
+    <PackageReference Include="Google.Apis.YouTube.v3" Version="1.69.0.3680" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AspireRecipeWebsite.ServiceDefaults\AspireRecipeWebsite.ServiceDefaults.csproj" />
   </ItemGroup>
 
 </Project>

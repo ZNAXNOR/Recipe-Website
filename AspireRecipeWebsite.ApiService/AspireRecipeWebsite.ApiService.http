@@ -1,0 +1,5 @@
+﻿@AspireRecipeWebsite.ApiService_HostAddress = https://localhost:7437
+
+GET {{AspireRecipeWebsite.ApiService_HostAddress}}/api/youtube
+
+###

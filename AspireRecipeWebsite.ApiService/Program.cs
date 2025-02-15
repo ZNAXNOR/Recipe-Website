@@ -5,11 +5,15 @@ builder.AddServiceDefaults();
 
 // Add services to the container.
 builder.Services.AddProblemDetails();
+builder.Services.AddControllers(); // Ensure controllers are added
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 app.UseExceptionHandler();
+app.UseRouting(); // Ensure routing is enabled
+app.UseAuthorization(); // Add authorization middleware if needed
+app.MapControllers();
 
 string[] summaries = ["Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"];
 
