@@ -10,4 +10,9 @@
     <ProjectReference Include="..\AspireRecipeWebsite.ServiceDefaults\AspireRecipeWebsite.ServiceDefaults.csproj" />
   </ItemGroup>
 
+  <Target Name="PreBuild" BeforeTargets="Build">
+    <Exec Command="npm install" />
+    <Exec Command="npm run build:css" />
+  </Target>
+
 </Project>
