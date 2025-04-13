@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35707.178 d17.12
+VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspireRecipeWebsite.AppHost", "AspireRecipeWebsite.AppHost\AspireRecipeWebsite.AppHost.csproj", "{2EB48129-F84C-4AF2-ADF2-9A4AA10667F6}"
 EndProject
@@ -35,5 +35,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {162A1CB4-E843-4B0E-B7FC-503C939B1E85}
 	EndGlobalSection
 EndGlobal
